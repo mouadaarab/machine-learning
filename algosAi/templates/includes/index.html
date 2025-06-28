@@ -1,0 +1,45 @@
+{% include "includes/header.html" %}
+{% load static %}
+<div class="container">
+    <h2 class="mb-4">Les Algorithmes</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <h5 class="card-header">Algorithme Random Forest</h5>
+                <div class="card-body">
+                    <img src="{% static 'images/RF.jpg' %}" class="card-img-top" alt="Random Forest">
+                    <div class="card-text mt-3">
+                        <p>
+                            L'algorithme Random Forest est un algorithme d'apprentissage ensembliste qui construit une multitude d'arbres de décision lors de I'entraînement
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer center">
+                    <a class="btn btn-info col-12 mt-2" href="{% url 'algosAi:rf_details' %}">Plus détails</a>
+                    <a class="btn btn-success col-12 mt-2" href="{% url 'algosAi:rf_iris' %}">Exemple de Classification</a>
+                    <a class="btn btn-primary col-12 mt-2" href="{% url 'algosAi:rf_regression' %}">Exemple de Régression</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card h-100">
+                <h5 class="card-header">Algorithme Decision Tree</h5>
+                <div class="card-body">
+                    <img src="{% static 'images/decision_tree.jpg' %}" class="card-img-top" alt="Decision Tree">
+                    <div class="card-text mt-3">
+                        <p>
+                            L'algorithme Decision Tree crée un modèle prédictif sous forme d'arbre de décision avec des règles simples et interprétables
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer center">
+                    <a class="btn btn-info col-12 mt-2" href="{% url 'algosAi:dt_details' %}">Plus détails</a>
+                    <a class="btn btn-success col-12 mt-2" href="{% url 'algosAi:dt_iris' %}">Exemple de Classification</a>
+                    <a class="btn btn-primary col-12 mt-2" href="{% url 'algosAi:dt_regression' %}">Exemple de Régression</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

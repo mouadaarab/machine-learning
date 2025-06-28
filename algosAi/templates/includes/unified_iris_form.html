@@ -1,0 +1,118 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Test du Modèle {{ algorithm }} - Classification Iris</h2>
+    
+    <form method="post" action="{{ action_url }}" class="border rounded border-secondary p-4">
+        {% csrf_token %}
+        
+        <div class="alert alert-info">
+            <strong>{{ algorithm }}:</strong> {{ algorithm_info }}
+        </div>
+        
+        <div class="mb-4">
+            <label for="sepal_length" class="form-label">Sepal Length (cm):</label>
+            <input type="range" class="form-range" min="4" max="8" step="0.1" id="sepal_length" name="sepal_length"
+                   value="5.0" oninput="sepalLengthValue.value = this.value">
+            <span class="slider-value" id="sepalLengthValue">5.0</span>
+            {% if algorithm == "Decision Tree" %}
+                <small class="text-muted">(Impact faible sur la prédiction)</small>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label for="sepal_width" class="form-label">Sepal Width (cm):</label>
+            <input type="range" class="form-range" min="2" max="4.5" step="0.1" id="sepal_width" name="sepal_width"
+                   value="3.0" oninput="sepalWidthValue.value = this.value">
+            <span class="slider-value" id="sepalWidthValue">3.0</span>
+            {% if algorithm == "Decision Tree" %}
+                <small class="text-muted">(Impact faible sur la prédiction)</small>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label for="petal_length" class="form-label">
+                Petal Length (cm): 
+                {% if algorithm == "Decision Tree" %}
+                    <span class="badge bg-danger">Très Important!</span>
+                {% endif %}
+            </label>
+            <input type="range" class="form-range" min="1" max="7" step="0.1" id="petal_length" name="petal_length"
+                   value="4.0" oninput="petalLengthValue.value = this.value">
+            <span class="slider-value" id="petalLengthValue">4.0</span>
+            {% if algorithm == "Decision Tree" %}
+                <div class="mt-1">
+                    <small class="text-success">≤ 2.45 cm → Setosa</small> | 
+                    <small class="text-info">2.45 - 4.75 cm → Souvent Versicolor</small> | 
+                    <small class="text-warning">> 4.75 cm → Souvent Virginica</small>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label for="petal_width" class="form-label">
+                Petal Width (cm): 
+                {% if algorithm == "Decision Tree" %}
+                    <span class="badge bg-warning">Important!</span>
+                {% endif %}
+            </label>
+            <input type="range" class="form-range" min="0.1" max="2.5" step="0.1" id="petal_width" name="petal_width"
+                   value="1.0" oninput="petalWidthValue.value = this.value">
+            <span class="slider-value" id="petalWidthValue">1.0</span>
+            {% if algorithm == "Decision Tree" %}
+                <div class="mt-1">
+                    <small class="text-info">≤ 1.65 cm → Plutôt Versicolor</small> | 
+                    <small class="text-warning">> 1.65 cm → Plutôt Virginica</small>
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary col-12">Prédire avec {{ algorithm }}</button>
+    </form>
+
+    {% if algorithm == "Decision Tree" %}
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5>Règles de Décision du Modèle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-light border">
+                        <h6>Arbre de décision simplifié :</h6>
+                        <code>
+                            1. Si <strong>Petal Length ≤ 2.45</strong> → <span class="text-success">Setosa</span> (100% certain)<br>
+                            2. Sinon, si <strong>Petal Width ≤ 1.65</strong> → <span class="text-info">Versicolor</span> (très probable)<br>
+                            3. Sinon → <span class="text-warning">Virginica</span> (très probable)
+                        </code>
+                    </div>
+                    <small class="text-muted">
+                        C'est la beauté du Decision Tree : des règles simples et interprétables !
+                    </small>
+                </div>
+            </div>
+        </div>
+    {% elif algorithm == "Random Forest" %}
+        <div class="mt-4">
+            <div class="alert alert-success">
+                <strong>Random Forest:</strong> Utilise plusieurs arbres de décision pour une prédiction plus robuste et précise.
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+// Initialize slider values on page load
+document.addEventListener('DOMContentLoaded', function() {
+    sepalLengthValue.textContent = sepal_length.value;
+    sepalWidthValue.textContent = sepal_width.value;
+    petalLengthValue.textContent = petal_length.value;
+    petalWidthValue.textContent = petal_width.value;
+});
+
+// Update slider value display on input
+sepal_length.oninput = () => sepalLengthValue.textContent = sepal_length.value;
+sepal_width.oninput = () => sepalWidthValue.textContent = sepal_width.value;
+petal_length.oninput = () => petalLengthValue.textContent = petal_length.value;
+petal_width.oninput = () => petalWidthValue.textContent = petal_width.value;
+</script>
+
+{% include "includes/footer.html" %}

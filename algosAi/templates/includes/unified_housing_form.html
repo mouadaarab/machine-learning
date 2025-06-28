@@ -1,0 +1,194 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Test du Modèle {{ algorithm }} - Régression des Prix Immobiliers</h2>
+    
+    <form method="post" action="{{ action_url }}" class="border rounded border-secondary p-4">
+        {% csrf_token %}
+        
+        <div class="alert alert-info">
+            <strong>{{ algorithm }}:</strong> {{ algorithm_info }}
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-4">
+                    <label for="med_inc" class="form-label">
+                        Revenu Médian (en dizaines de milliers $): 
+                        {% if algorithm == "Decision Tree" %}
+                            <span class="badge bg-danger">Très Important!</span>
+                        {% endif %}
+                    </label>
+                    <input type="range" class="form-range" min="0.5" max="15" step="0.1" id="med_inc" name="med_inc"
+                           value="5.0" oninput="medIncValue.value = this.value">
+                    <span class="slider-value" id="medIncValue">5.0</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <div class="mt-1">
+                            <small class="text-success">< 3.0 → Prix bas</small> | 
+                            <small class="text-warning">3.0-8.0 → Prix moyen</small> | 
+                            <small class="text-danger">> 8.0 → Prix élevé</small>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="house_age" class="form-label">Âge de la Maison (années):</label>
+                    <input type="range" class="form-range" min="1" max="52" step="1" id="house_age" name="house_age"
+                           value="25" oninput="houseAgeValue.value = this.value">
+                    <span class="slider-value" id="houseAgeValue">25</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact modéré - 4.5%)</small>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="ave_rooms" class="form-label">Nombre Moyen de Pièces:</label>
+                    <input type="range" class="form-range" min="3" max="12" step="0.1" id="ave_rooms" name="ave_rooms"
+                           value="6.0" oninput="aveRoomsValue.value = this.value">
+                    <span class="slider-value" id="aveRoomsValue">6.0</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact faible - 3.7%)</small>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="ave_bedrms" class="form-label">Nombre Moyen de Chambres:</label>
+                    <input type="range" class="form-range" min="0.8" max="2.5" step="0.05" id="ave_bedrms" name="ave_bedrms"
+                           value="1.2" oninput="aveBedrmsValue.value = this.value">
+                    <span class="slider-value" id="aveBedrmsValue">1.2</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact très faible - 1.1%)</small>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-4">
+                    <label for="population" class="form-label">Population du Quartier:</label>
+                    <input type="range" class="form-range" min="100" max="8000" step="50" id="population" name="population"
+                           value="3000" oninput="populationValue.value = this.value">
+                    <span class="slider-value" id="populationValue">3000</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact très faible - 1.3%)</small>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="ave_occup" class="form-label">
+                        Occupation Moyenne (personnes/logement): 
+                        {% if algorithm == "Decision Tree" %}
+                            <span class="badge bg-warning">Important!</span>
+                        {% endif %}
+                    </label>
+                    <input type="range" class="form-range" min="1" max="8" step="0.1" id="ave_occup" name="ave_occup"
+                           value="3.0" oninput="aveOccupValue.value = this.value">
+                    <span class="slider-value" id="aveOccupValue">3.0</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <div class="mt-1">
+                            <small class="text-success">< 3.0 → Meilleur</small> | 
+                            <small class="text-warning">> 4.0 → Impact négatif sur prix</small>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="latitude" class="form-label">
+                        Latitude: 
+                        {% if algorithm == "Decision Tree" %}
+                            <span class="badge bg-info">Géographique!</span>
+                        {% endif %}
+                    </label>
+                    <input type="range" class="form-range" min="32.5" max="42" step="0.1" id="latitude" name="latitude"
+                           value="34.0" oninput="latitudeValue.value = this.value">
+                    <span class="slider-value" id="latitudeValue">34.0</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact géographique - 8.0%)</small>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="longitude" class="form-label">
+                        Longitude: 
+                        {% if algorithm == "Decision Tree" %}
+                            <span class="badge bg-info">Géographique!</span>
+                        {% endif %}
+                    </label>
+                    <input type="range" class="form-range" min="-124.5" max="-114" step="0.1" id="longitude" name="longitude"
+                           value="-118.0" oninput="longitudeValue.value = this.value">
+                    <span class="slider-value" id="longitudeValue">-118.0</span>
+                    {% if algorithm == "Decision Tree" %}
+                        <small class="text-muted">(Impact géographique - 6.5%)</small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success col-12 mt-3">Prédire le Prix avec {{ algorithm }}</button>
+    </form>
+
+    {% if algorithm == "Decision Tree" %}
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5>Logique Simplifiée du Decision Tree</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-light border">
+                        <h6>Principales règles de décision :</h6>
+                        <code>
+                            Si <strong>MedInc ≤ 2.5</strong> → Prix généralement < $200,000<br>
+                            Si <strong>MedInc > 2.5 ET MedInc ≤ 5.0</strong> → Prix moyen $200,000 - $350,000<br>
+                            Si <strong>MedInc > 5.0 ET AveOccup ≤ 3.0</strong> → Prix élevé > $350,000<br>
+                            Si <strong>MedInc > 8.0 ET Latitude favorable</strong> → Prix très élevé > $500,000
+                        </code>
+                    </div>
+                    <small class="text-muted">
+                        * Règles simplifiées. L'arbre réel contient de nombreuses branches plus spécifiques.
+                    </small>
+                </div>
+            </div>
+        </div>
+    {% elif algorithm == "Random Forest" %}
+        <div class="mt-4">
+            <div class="alert alert-success">
+                <strong>Random Forest:</strong> Utilise 100 arbres de décision pour une prédiction de régression plus précise et robuste.
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="mt-3">
+        <div class="alert alert-{{ algorithm|lower == 'decision tree' and 'success' or 'info' }}">
+            <strong>Avantage {{ algorithm }}:</strong> 
+            {% if algorithm == "Decision Tree" %}
+                Contrairement au Random Forest, vous pouvez tracer l'arbre complet et voir toutes les règles de décision !
+            {% else %}
+                Ensemble de multiples arbres pour des prédictions plus robustes et précises !
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+// Initialize slider values on page load
+document.addEventListener('DOMContentLoaded', function() {
+    medIncValue.textContent = med_inc.value;
+    houseAgeValue.textContent = house_age.value;
+    aveRoomsValue.textContent = ave_rooms.value;
+    aveBedrmsValue.textContent = ave_bedrms.value;
+    populationValue.textContent = population.value;
+    aveOccupValue.textContent = ave_occup.value;
+    latitudeValue.textContent = latitude.value;
+    longitudeValue.textContent = longitude.value;
+});
+
+// Update slider value display on input
+med_inc.oninput = () => medIncValue.textContent = med_inc.value;
+house_age.oninput = () => houseAgeValue.textContent = house_age.value;
+ave_rooms.oninput = () => aveRoomsValue.textContent = ave_rooms.value;
+ave_bedrms.oninput = () => aveBedrmsValue.textContent = ave_bedrms.value;
+population.oninput = () => populationValue.textContent = population.value;
+ave_occup.oninput = () => aveOccupValue.textContent = ave_occup.value;
+latitude.oninput = () => latitudeValue.textContent = latitude.value;
+longitude.oninput = () => longitudeValue.textContent = longitude.value;
+</script>
+
+{% include "includes/footer.html" %}

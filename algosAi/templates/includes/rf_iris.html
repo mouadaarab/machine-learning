@@ -1,0 +1,37 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Random Forest pour la prédiction de type des fleurs - IRIS</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Details</h3>
+            <p>IRIS est un jeu de données bien connu en ML, qui contient des mesures de différentes caractéristiques de fleurs d'iris.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Les étapes d'implémentation:</h3>
+            <ul>
+                <li>Chargement du jeu de données IRIS</li>
+                <li>Prétraitement des données</li>
+                <li>Entraînement du modèle Random Forest</li>
+                <li>Évaluation du modèle</li>
+                <li>Enregistrement du modèle entrainé</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="alert alert-info" role="info">
+        <strong>Info:</strong> Le modèle entraîné est sauvegardé dans cette atelier est cel utilisé dans le test (<em>test le modèle</em>).
+    </div>
+
+    <div>
+        <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-primary col-12">Tester le Modèle RF</a>
+    </div>
+
+    <div>
+        {% load static %}
+        <iframe src="{% static 'pdfs/IRIS_example_notebook.pdf' %}" width="100%" height="600px" style="border:1px solid #ccc;">
+            Ce navigateur ne support pas PDFs. Veuillez le télécharger ICI:
+            <a href="{% static 'pdfs/IRIS_example_notebook.pdf' %}">Download PDF</a>
+        </iframe>
+    </div>
+</div>
+{% include "includes/footer.html" %}

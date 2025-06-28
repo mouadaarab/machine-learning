@@ -1,0 +1,29 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Random Forest Algorithm</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Details</h3>
+            <p>L'algorithme Random Forest est un algorithme d'apprentissage ensembliste qui construit une multitude d'arbres 
+            de décision au moment de l'apprentissage et produit le mode des classes (classification) ou la prédiction moyenne 
+            (régression) des arbres individuels.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Applications</h3>
+            <ul>
+                <li>Tâches de Classification</li>
+                <li>Tâches de Regression</li>
+                <li>Feature selection</li>
+                <li>Anomaly detection</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        {% load static %}
+        <iframe src="{% static 'pdfs/random_forest_course.pdf' %}" width="100%" height="600px" style="border:1px solid #ccc;">
+            Ce navigateur ne supporte pas PDFs. Veuillez le télécharger:
+            <a href="{% static 'pdfs/random_forest_course.pdf' %}">Download PDF</a>
+        </iframe>
+    </div>
+</div>
+{% include "includes/footer.html" %}

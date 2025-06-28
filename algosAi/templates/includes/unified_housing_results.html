@@ -1,0 +1,202 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Résultat de la Prédiction {{ algorithm }} - Prix Immobilier</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Prix Prédit par {{ algorithm }}</h4>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-success text-center">${{ predicted_price|floatformat:0 }}</h2>
+                    <p class="text-center text-muted">Prix estimé de la propriété</p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Données Utilisées pour la Prédiction</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Revenu Médian: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-danger">Clé</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>${{ input_data.med_inc|floatformat:1 }}0k</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Âge de la Maison:</strong>
+                                    <span>{{ input_data.house_age|floatformat:0 }} ans</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Nombre Moyen de Pièces:</strong>
+                                    <span>{{ input_data.ave_rooms|floatformat:1 }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Nombre Moyen de Chambres:</strong>
+                                    <span>{{ input_data.ave_bedrms|floatformat:2 }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Population du Quartier:</strong>
+                                    <span>{{ input_data.population|floatformat:0 }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Occupation Moyenne: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-warning">Important</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>{{ input_data.ave_occup|floatformat:1 }} pers./logement</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Latitude: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-info">Géo</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>{{ input_data.latitude|floatformat:1 }}°</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Longitude: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-info">Géo</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>{{ input_data.longitude|floatformat:1 }}°</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            {% if algorithm == "Decision Tree" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Logique de Décision</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if input_data.med_inc <= 2.5 %}
+                            <div class="alert alert-info">
+                                <strong>Règle principale:</strong><br>
+                                Revenu Médian ≤ $25k<br>
+                                → <strong>Prix Bas</strong><br>
+                                Quartier à revenu faible
+                            </div>
+                        {% elif input_data.med_inc <= 5.0 %}
+                            <div class="alert alert-success">
+                                <strong>Règles appliquées:</strong><br>
+                                1. Revenu > $25k ✓<br>
+                                2. Revenu ≤ $50k ✓<br>
+                                → <strong>Prix Moyen</strong><br>
+                                Quartier de classe moyenne
+                            </div>
+                        {% elif input_data.med_inc <= 8.0 %}
+                            <div class="alert alert-warning">
+                                <strong>Règles appliquées:</strong><br>
+                                1. Revenu > $50k ✓<br>
+                                2. Revenu ≤ $80k ✓<br>
+                                {% if input_data.ave_occup <= 3.0 %}
+                                3. Faible densité ✓<br>
+                                {% endif %}
+                                → <strong>Prix Élevé</strong>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <strong>Règles appliquées:</strong><br>
+                                1. Revenu > $80k ✓<br>
+                                {% if input_data.latitude >= 37.0 and input_data.latitude <= 38.0 %}
+                                2. Zone premium (SF Bay) ✓<br>
+                                {% endif %}
+                                → <strong>Prix Très Élevé</strong><br>
+                                Quartier haut de gamme
+                            </div>
+                        {% endif %}
+
+                        <small class="text-muted">
+                            <strong>Facteur clé:</strong> Le revenu médian ({{ input_data.med_inc|floatformat:1 }}0k$) détermine principalement cette prédiction.
+                        </small>
+                    </div>
+                </div>
+            {% elif algorithm == "Random Forest" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Analyse Random Forest</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong>Prédiction d'Ensemble</strong><br>
+                            Cette prédiction est basée sur la moyenne de 100 arbres de décision différents.
+                        </div>
+                        <small class="text-muted">
+                            Random Forest combine plusieurs arbres pour réduire la variance et améliorer la précision.
+                        </small>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card mt-3">
+                <div class="card-header bg-light">
+                    <h6>Comparaison des Modèles</h6>
+                </div>
+                <div class="card-body">
+                    <small>
+                        <strong>Decision Tree:</strong><br>
+                        • R² = 0.689<br>
+                        • Complètement interprétable<br>
+                        • Règles claires<br><br>
+                        
+                        <strong>Random Forest:</strong><br>
+                        • R² = 0.775<br>
+                        • Plus précis<br>
+                        • Moins interprétable
+                    </small>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    {% if predicted_price < 150000 %}
+                        <div class="alert alert-info">
+                            <strong>Prix Abordable</strong><br>
+                            <small>Quartier à prix accessible</small>
+                        </div>
+                    {% elif predicted_price < 300000 %}
+                        <div class="alert alert-success">
+                            <strong>Prix Modéré</strong><br>
+                            <small>Dans la moyenne du marché</small>
+                        </div>
+                    {% elif predicted_price < 500000 %}
+                        <div class="alert alert-warning">
+                            <strong>Prix Élevé</strong><br>
+                            <small>Zone recherchée</small>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            <strong>Prix Premium</strong><br>
+                            <small>Quartier très haut de gamme</small>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{{ form_url }}" class="btn btn-primary me-2">Faire une Nouvelle Prédiction</a>
+        <a href="{{ details_url }}" class="btn btn-secondary">Retour aux Détails</a>
+    </div>
+</div>
+{% include "includes/footer.html" %}

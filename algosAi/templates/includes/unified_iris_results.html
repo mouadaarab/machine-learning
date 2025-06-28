@@ -1,0 +1,140 @@
+{% include "includes/header.html" %}
+{% load static %}
+<div class="container">
+    <h2 class="mb-4">Résultat de la Prédiction {{ algorithm }} - Classification Iris</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Espèce Prédite</h4>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{% static predicted_img %}" class="img-fluid rounded mb-3" alt="{{ predicted_species }}" style="max-height: 200px;">
+                    <h2 class="text-success">{{ predicted_species }}</h2>
+                    <p class="text-muted">Prédiction faite par <strong>{{ algorithm }}</strong></p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Données Utilisées pour la Prédiction</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Sepal Length:</strong>
+                                    <span>{{ input_data.sepal_length }} cm</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Sepal Width:</strong>
+                                    <span>{{ input_data.sepal_width }} cm</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Petal Length: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-danger">Clé</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>{{ input_data.petal_length }} cm</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <strong>Petal Width: 
+                                        {% if algorithm == "Decision Tree" %}
+                                            <span class="badge bg-warning">Important</span>
+                                        {% endif %}
+                                    </strong>
+                                    <span>{{ input_data.petal_width }} cm</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            {% if algorithm == "Decision Tree" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Logique de Décision</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if input_data.petal_length <= 2.45 %}
+                            <div class="alert alert-success">
+                                <strong>Règle appliquée:</strong><br>
+                                Petal Length ≤ 2.45 cm<br>
+                                → <strong>Setosa</strong>
+                            </div>
+                            <small class="text-muted">
+                                Cette règle est fiable à 100% selon le modèle.
+                            </small>
+                        {% elif input_data.petal_width <= 1.65 %}
+                            <div class="alert alert-info">
+                                <strong>Règles appliquées:</strong><br>
+                                1. Petal Length > 2.45 cm ✓<br>
+                                2. Petal Width ≤ 1.65 cm ✓<br>
+                                → <strong>Versicolor</strong>
+                            </div>
+                            <small class="text-muted">
+                                Cette combinaison indique très probablement Versicolor.
+                            </small>
+                        {% else %}
+                            <div class="alert alert-warning">
+                                <strong>Règles appliquées:</strong><br>
+                                1. Petal Length > 2.45 cm ✓<br>
+                                2. Petal Width > 1.65 cm ✓<br>
+                                → <strong>Virginica</strong>
+                            </div>
+                            <small class="text-muted">
+                                Ces grandes dimensions des pétales sont caractéristiques de Virginica.
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            {% elif algorithm == "Random Forest" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Analyse Random Forest</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong>Prédiction d'Ensemble</strong><br>
+                            Cette prédiction est basée sur le vote de 100 arbres de décision différents.
+                        </div>
+                        <small class="text-muted">
+                            Random Forest combine plusieurs arbres pour une prédiction plus robuste que celle d'un seul arbre.
+                        </small>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card mt-3">
+                <div class="card-header bg-light">
+                    <h6>Avantage {{ algorithm }}</h6>
+                </div>
+                <div class="card-body">
+                    <small class="text-muted">
+                        {% if algorithm == "Decision Tree" %}
+                            Contrairement aux algorithmes "boîte noire", vous pouvez voir exactement pourquoi cette prédiction a été faite !
+                        {% elif algorithm == "Random Forest" %}
+                            Ensemble de multiples arbres pour des prédictions plus robustes et précises !
+                        {% endif %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{{ form_url }}" class="btn btn-primary me-2">Faire une Nouvelle Prédiction</a>
+        <a href="{{ details_url }}" class="btn btn-secondary">Retour aux Détails</a>
+    </div>
+</div>
+{% include "includes/footer.html" %}

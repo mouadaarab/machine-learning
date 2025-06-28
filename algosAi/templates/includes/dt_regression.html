@@ -1,0 +1,101 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">Decision Tree pour la prédiction des prix immobiliers - California Housing</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Détails</h3>
+            <p>Le dataset California Housing contient des informations sur les prix des logements en Californie basées sur le recensement de 1990.</p>
+            <p>Le modèle Decision Tree utilise un arbre de décision unique pour prédire les prix, offrant une excellente interprétabilité des règles de prédiction.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Les étapes d'implémentation:</h3>
+            <ul>
+                <li>Chargement du jeu de données California Housing</li>
+                <li>Prétraitement des données</li>
+                <li>Entraînement du modèle Decision Tree Regressor</li>
+                <li>Évaluation du modèle (MSE, RMSE, R²)</li>
+                <li>Enregistrement du modèle entraîné</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Caractéristiques du dataset:</h3>
+            <ul>
+                <li><strong>MedInc:</strong> Revenu médian du quartier (Facteur le plus important - 61.8%)</li>
+                <li><strong>AveOccup:</strong> Occupation moyenne (13.2% d'importance)</li>
+                <li><strong>Latitude/Longitude:</strong> Position géographique (14.5% combiné)</li>
+                <li><strong>HouseAge:</strong> Âge médian des maisons (4.5% d'importance)</li>
+                <li><strong>AveRooms:</strong> Nombre moyen de pièces par logement</li>
+                <li><strong>Population:</strong> Population du quartier</li>
+                <li><strong>AveBedrms:</strong> Nombre moyen de chambres par logement</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Performance du Modèle Decision Tree</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>R² Score</h5>
+                            <h2 class="text-primary">0.689</h2>
+                            <small class="text-muted">69% de la variance expliquée</small>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>RMSE</h5>
+                            <h2 class="text-warning">$63,850</h2>
+                            <small class="text-muted">Erreur moyenne de prédiction</small>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Comparaison</h5>
+                            <p><strong>vs Random Forest:</strong></p>
+                            <ul class="small">
+                                <li>RF: R² = 0.77</li>
+                                <li>DT: R² = 0.69</li>
+                                <li>DT plus interprétable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info" role="info">
+        <strong>Info:</strong> Le modèle entraîné sauvegardé dans cet atelier est celui utilisé dans le test (<em>Tester le modèle</em>).
+        Bien que légèrement moins précis que Random Forest, le Decision Tree offre l'avantage d'être complètement interprétable.
+    </div>
+
+    <div class="alert alert-success" role="alert">
+        <strong>Avantage principal:</strong> Vous pouvez tracer l'arbre de décision et voir exactement quelles règles sont utilisées pour chaque prédiction !
+    </div>
+
+    <div>
+        <a href="{% url 'algosAi:dt_housing_exemple_tester' %}" class="btn btn-primary col-12">Tester le Modèle Decision Tree pour la Régression</a>
+    </div>
+
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5>Exemple de Règles de Décision</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-light border">
+                    <code>
+                        Si MedInc ≤ 5.0 ET Latitude > 34.0 → Prix ≈ $150,000<br>
+                        Si MedInc > 5.0 ET AveOccup ≤ 3.0 → Prix ≈ $300,000<br>
+                        Si MedInc > 8.0 ET Latitude ≤ 37.5 → Prix ≈ $500,000<br>
+                        <small class="text-muted">* Règles simplifiées à des fins d'illustration</small>
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

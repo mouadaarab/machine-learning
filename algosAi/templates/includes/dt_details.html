@@ -1,0 +1,127 @@
+{% include "includes/header.html" %}
+{% load static %}
+<div class="container">
+    <h2 class="mb-4">Algorithme Decision Tree (Arbre de Décision)</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Qu'est-ce qu'un Decision Tree ?</h4>
+                </div>
+                <div class="card-body">
+                    <p>Un <strong>Decision Tree</strong> (Arbre de Décision) est un algorithme d'apprentissage supervisé qui peut être utilisé pour les tâches de classification et de régression.</p>
+                    <p>Il modélise les décisions sous forme d'arbre où chaque nœud interne représente un test sur un attribut, chaque branche représente le résultat du test, et chaque feuille représente une étiquette de classe.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>Avantages</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Interprétabilité :</strong> Facile à comprendre et à interpréter</li>
+                        <li><strong>Pas de préparation :</strong> Peu de préparation des données nécessaire</li>
+                        <li><strong>Flexibilité :</strong> Peut gérer des données numériques et catégorielles</li>
+                        <li><strong>Rapide :</strong> Prédictions rapides</li>
+                        <li><strong>Sélection automatique :</strong> Sélection automatique des caractéristiques importantes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4>Inconvénients</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Surapprentissage :</strong> Tendance au surapprentissage</li>
+                        <li><strong>Instabilité :</strong> Petits changements dans les données peuvent créer un arbre très différent</li>
+                        <li><strong>Biais :</strong> Bias vers les caractéristiques avec plus de niveaux</li>
+                        <li><strong>Difficulté :</strong> Difficile à optimiser globalement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>Paramètres Importants</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>max_depth :</strong> Profondeur maximale de l'arbre</li>
+                        <li><strong>min_samples_split :</strong> Nombre minimum d'échantillons pour diviser un nœud</li>
+                        <li><strong>min_samples_leaf :</strong> Nombre minimum d'échantillons dans une feuille</li>
+                        <li><strong>criterion :</strong> Fonction pour mesurer la qualité d'une division</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>Comment ça fonctionne ?</h4>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li><strong>Sélection de l'attribut :</strong> Choisir le meilleur attribut pour diviser les données</li>
+                        <li><strong>Division :</strong> Diviser l'ensemble de données selon l'attribut sélectionné</li>
+                        <li><strong>Récursion :</strong> Répéter le processus pour chaque sous-ensemble</li>
+                        <li><strong>Arrêt :</strong> S'arrêter selon des critères prédéfinis (profondeur, nombre d'échantillons, etc.)</li>
+                        <li><strong>Prédiction :</strong> Suivre le chemin dans l'arbre pour faire une prédiction</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>Différence avec Random Forest</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Decision Tree :</h5>
+                            <ul>
+                                <li>Un seul arbre</li>
+                                <li>Plus simple et rapide</li>
+                                <li>Plus interprétable</li>
+                                <li>Tendance au surapprentissage</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Random Forest :</h5>
+                            <ul>
+                                <li>Ensemble de plusieurs arbres</li>
+                                <li>Plus complexe mais plus robuste</li>
+                                <li>Moins interprétable</li>
+                                <li>Réduit le surapprentissage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{% url 'algosAi:dt_iris' %}" class="btn btn-success btn-lg me-3">Exemple de Classification</a>
+        <a href="{% url 'algosAi:dt_regression' %}" class="btn btn-primary btn-lg">Exemple de Régression</a>
+    </div>
+</div>
+{% include "includes/footer.html" %}
