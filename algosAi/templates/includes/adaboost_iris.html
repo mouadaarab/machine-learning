@@ -1,0 +1,112 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">AdaBoost pour la prédiction de type des fleurs - IRIS</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Détails</h3>
+            <p>IRIS est un jeu de données bien connu en ML, qui contient des mesures de différentes caractéristiques de fleurs d'iris.</p>
+            <p>Le modèle AdaBoost atteint une <strong>précision de 93.3%</strong> sur ce dataset, en utilisant des arbres de décision comme weak learners.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Les étapes d'implémentation:</h3>
+            <ul>
+                <li>Chargement du jeu de données IRIS</li>
+                <li>Prétraitement des données</li>
+                <li>Entraînement du modèle AdaBoost avec 100 estimateurs</li>
+                <li>Évaluation du modèle</li>
+                <li>Enregistrement du modèle entraîné</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>Performance du Modèle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Précision Globale</h5>
+                            <h2 class="text-success">93.3%</h2>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Importance des Caractéristiques</h5>
+                            <ul>
+                                <li><strong>Petal Width:</strong> 64.9% (Très importante)</li>
+                                <li><strong>Petal Length:</strong> 26.0% (Importante)</li>
+                                <li><strong>Sepal Length:</strong> 5.5% (Faible impact)</li>
+                                <li><strong>Sepal Width:</strong> 3.6% (Très faible impact)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info" role="info">
+        <strong>Info:</strong> Le modèle entraîné sauvegardé dans cet atelier est celui utilisé dans le test (<em>Tester le modèle</em>). 
+        AdaBoost combine 100 arbres de décision faibles pour créer un classificateur robuste qui se concentre progressivement sur les échantillons difficiles.
+    </div>
+
+    <div class="alert alert-success" role="alert">
+        <strong>Avantage d'AdaBoost:</strong> L'algorithme s'adapte automatiquement aux échantillons mal classifiés, améliorant progressivement les performances !
+    </div>
+
+    <div>
+        <a href="{% url 'algosAi:adaboost_iris_exemple_tester' %}" class="btn btn-primary col-12">Tester le Modèle AdaBoost</a>
+    </div>
+
+    <div class="mt-4">
+        <h3>Processus d'Apprentissage AdaBoost</h3>
+        <div class="alert alert-light border">
+            <h6>Étapes séquentielles :</h6>
+            <ol>
+                <li><strong>Itération 1:</strong> Tous les échantillons ont le même poids</li>
+                <li><strong>Entraînement:</strong> Un arbre faible apprend sur les données pondérées</li>
+                <li><strong>Évaluation:</strong> Calcul de l'erreur et du poids du modèle</li>
+                <li><strong>Mise à jour:</strong> Augmentation du poids des échantillons mal classifiés</li>
+                <li><strong>Répétition:</strong> 100 fois pour créer un ensemble robuste</li>
+                <li><strong>Prédiction finale:</strong> Vote pondéré de tous les arbres</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Configuration du Modèle</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Paramètres AdaBoost</h6>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>n_estimators:</strong> 100</li>
+                            <li><strong>learning_rate:</strong> 1.0</li>
+                            <li><strong>algorithm:</strong> SAMME</li>
+                            <li><strong>base_estimator:</strong> DecisionTree (max_depth=1)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Métriques de Performance</h6>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Accuracy:</strong> 93.3%</li>
+                            <li><strong>Validation croisée:</strong> 95.3% (±6.8%)</li>
+                            <li><strong>Précision par classe:</strong> Setosa (100%), Versicolor (90%), Virginica (90%)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

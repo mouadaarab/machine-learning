@@ -18,6 +18,12 @@ Ce dossier contient les scripts pour créer et entraîner les modèles de Machin
   - Iris : 100% de précision (parfait sur ce dataset simple)
   - California Housing : R² = 0.689
 
+### 🚀 AdaBoost (Les Deux)
+- **`create_adaboost_models.py`** : Crée les modèles AdaBoost pour classification et régression
+- **Performances** :
+  - Iris : 93.3% de précision (excellent avec boosting adaptatif)
+  - California Housing : R² = 0.386
+
 ### 📚 Documentation
 - **`MODEL_README.md`** : Documentation détaillée des modèles (si existant)
 
@@ -34,6 +40,9 @@ python scripts/create_california_housing_model.py
 
 # Modèles Decision Tree
 python scripts/create_decision_tree_models.py
+
+# Modèles AdaBoost
+python scripts/create_adaboost_models.py
 ```
 
 ### Que Font les Scripts ?

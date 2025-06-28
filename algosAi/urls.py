@@ -24,5 +24,16 @@ urlpatterns = [
     path('dt_iris_prediction_results/', views.dt_iris_prediction_results, name='dt_iris_prediction_results'),
     
     path('dt_housing_test/', views.dt_housing_exemple_tester, name='dt_housing_exemple_tester'),
-    path('dt_housing_prediction_results/', views.dt_housing_prediction_results, name='dt_housing_prediction_results')
+    path('dt_housing_prediction_results/', views.dt_housing_prediction_results, name='dt_housing_prediction_results'),
+
+    # AdaBoost routes
+    path('adaboost_details/', views.adaboost_details, name='adaboost_details'),
+    path('adaboost_iris/', views.adaboost_iris, name='adaboost_iris'),
+    path('adaboost_regression/', views.adaboost_regression, name='adaboost_regression'),
+    
+    path('adaboost_iris_test/', views.adaboost_iris_exemple_tester, name='adaboost_iris_exemple_tester'),
+    path('adaboost_iris_prediction_results/', views.adaboost_iris_prediction_results, name='adaboost_iris_prediction_results'),
+    
+    path('adaboost_housing_test/', views.adaboost_housing_exemple_tester, name='adaboost_housing_exemple_tester'),
+    path('adaboost_housing_prediction_results/', views.adaboost_housing_prediction_results, name='adaboost_housing_prediction_results'),
 ]

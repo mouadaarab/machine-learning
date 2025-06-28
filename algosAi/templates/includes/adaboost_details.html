@@ -1,0 +1,210 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <h2 class="mb-4">AdaBoost (Adaptive Boosting)</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4>🚀 Qu'est-ce qu'AdaBoost ?</h4>
+                <p><strong>AdaBoost (Adaptive Boosting)</strong> est un algorithme d'ensemble qui combine plusieurs "weak learners" (apprenants faibles) pour créer un modèle fort. Il ajuste adaptivement le poids des échantillons mal classifiés à chaque itération.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Performance élevée</strong> : Améliore significativement la performance des weak learners</li>
+                        <li><strong>Réduction du biais</strong> : Convertit les weak learners en strong learners</li>
+                        <li><strong>Adaptabilité</strong> : S'adapte aux échantillons difficiles à classifier</li>
+                        <li><strong>Simplicité</strong> : Facile à implémenter et comprendre</li>
+                        <li><strong>Polyvalence</strong> : Fonctionne avec différents types d'algorithmes de base</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5>⚠️ Inconvénients</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Sensible au bruit</strong> : Peut surajuster sur des données bruitées</li>
+                        <li><strong>Sensible aux outliers</strong> : Les outliers peuvent avoir un impact disproportionné</li>
+                        <li><strong>Performance dépendante</strong> : Qualité limitée par les weak learners</li>
+                        <li><strong>Complexité temporelle</strong> : Plus lent que les algorithmes simples</li>
+                        <li><strong>Paramètres critiques</strong> : Le learning rate et n_estimators doivent être bien choisis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5>🛠️ Comment ça Marche ?</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>📊 Algorithme :</h6>
+                            <ol>
+                                <li><strong>Initialisation</strong> : Tous les échantillons ont le même poids</li>
+                                <li><strong>Entraînement</strong> : Entraîner un weak learner sur les données pondérées</li>
+                                <li><strong>Évaluation</strong> : Calculer l'erreur du modèle</li>
+                                <li><strong>Pondération</strong> : Calculer le poids du modèle selon son erreur</li>
+                                <li><strong>Mise à jour</strong> : Augmenter le poids des échantillons mal classifiés</li>
+                                <li><strong>Répétition</strong> : Répéter jusqu'au nombre d'estimateurs souhaité</li>
+                                <li><strong>Prédiction finale</strong> : Vote pondéré de tous les modèles</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>🎯 Paramètres Clés :</h6>
+                            <ul>
+                                <li><strong>n_estimators</strong> : Nombre de weak learners (défaut: 50)</li>
+                                <li><strong>learning_rate</strong> : Taux d'apprentissage (défaut: 1.0)</li>
+                                <li><strong>base_estimator</strong> : Type de weak learner (défaut: DecisionTree)</li>
+                                <li><strong>algorithm</strong> : SAMME pour la classification discrète</li>
+                                <li><strong>loss</strong> : Fonction de perte pour la régression</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>🎓 Cas d'Usage</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>🌸 Classification :</h6>
+                            <ul>
+                                <li>Reconnaissance de visages</li>
+                                <li>Classification de texte</li>
+                                <li>Détection d'objets</li>
+                                <li>Diagnostic médical</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>🏠 Régression :</h6>
+                            <ul>
+                                <li>Prédiction de prix</li>
+                                <li>Prévision de ventes</li>
+                                <li>Estimation de risques</li>
+                                <li>Analyse financière</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>🔍 Quand l'utiliser :</h6>
+                            <ul>
+                                <li>Données avec signal faible</li>
+                                <li>Besoin d'améliorer des modèles simples</li>
+                                <li>Classification binaire complexe</li>
+                                <li>Quand on a des weak learners disponibles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">
+                    <h5>⚖️ AdaBoost vs Autres Algorithmes</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Critère</th>
+                                    <th>AdaBoost</th>
+                                    <th>Random Forest</th>
+                                    <th>Decision Tree</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Méthode</strong></td>
+                                    <td>Boosting séquentiel</td>
+                                    <td>Bagging parallèle</td>
+                                    <td>Arbre unique</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Biais</strong></td>
+                                    <td>Faible (réduction active)</td>
+                                    <td>Moyen</td>
+                                    <td>Peut être élevé</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Variance</strong></td>
+                                    <td>Peut être élevée</td>
+                                    <td>Faible (réduction active)</td>
+                                    <td>Élevée</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sensibilité au bruit</strong></td>
+                                    <td>Élevée</td>
+                                    <td>Faible</td>
+                                    <td>Moyenne</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interprétabilité</strong></td>
+                                    <td>Faible</td>
+                                    <td>Faible</td>
+                                    <td>Élevée</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vitesse d'entraînement</strong></td>
+                                    <td>Moyenne (séquentiel)</td>
+                                    <td>Rapide (parallèle)</td>
+                                    <td>Très rapide</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🌸 Classification Iris</h5>
+                    <p class="card-text">Testez AdaBoost sur la classification des espèces d'iris</p>
+                    <a href="{% url 'algosAi:adaboost_iris' %}" class="btn btn-primary">Voir les Détails</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🏠 Régression California Housing</h5>
+                    <p class="card-text">Testez AdaBoost sur la prédiction de prix immobiliers</p>
+                    <a href="{% url 'algosAi:adaboost_regression' %}" class="btn btn-primary">Voir les Détails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

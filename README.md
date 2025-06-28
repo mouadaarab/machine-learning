@@ -35,6 +35,7 @@ AI Platform Django est une application web éducative qui permet aux utilisateur
 ### 🔬 Algorithmes de Machine Learning
 - **Random Forest** : Classification et Régression
 - **Decision Tree** : Classification et Régression avec règles interprétables
+- **AdaBoost** : Classification et Régression avec boosting adaptatif
 
 ### 📊 Exemples Interactifs
 - **Classification Iris** : Prédiction d'espèces de fleurs
@@ -105,6 +106,9 @@ python scripts/create_california_housing_model.py
 
 # Modèles Decision Tree
 python scripts/create_decision_tree_models.py
+
+# Modèles AdaBoost
+python scripts/create_adaboost_models.py
 ```
 
 ### 5. Configurer Django
@@ -174,6 +178,21 @@ L'application sera accessible à : `http://127.0.0.1:8000`
 - Iris : 100% de précision sur le test
 - California Housing : R² = 0.69
 
+### 🚀 AdaBoost (Adaptive Boosting)
+**Avantages :**
+- Améliore les "weak learners" 
+- Réduit le biais efficacement
+- S'adapte aux échantillons difficiles
+
+**Inconvénients :**
+- Sensible au bruit et aux outliers
+- Plus lent (entraînement séquentiel)
+- Risque de surapprentissage sur des données bruitées
+
+**Performances :**
+- Iris : 93.3% de précision
+- California Housing : R² = 0.386
+
 ## 📁 Structure du Projet
 
 ```
@@ -214,11 +233,16 @@ aiPlateform/
 │   ├── 📄 decision_tree_iris_model.pkl
 │   ├── 📄 decision_tree_iris_model_info.pkl
 │   ├── 📄 decision_tree_housing_model.pkl
-│   └── 📄 decision_tree_housing_model_info.pkl
-└── 📁 scripts/                 # Scripts de création des modèles
+│   ├── 📄 decision_tree_housing_model_info.pkl
+│   ├── 📄 adaboost_iris_model.pkl
+│   ├── 📄 adaboost_iris_model_info.pkl
+│   ├── 📄 adaboost_housing_model.pkl
+│   └── � adaboost_housing_model_info.pkl
+└── �📁 scripts/                 # Scripts de création des modèles
     ├── 📄 create_iris_model.py
     ├── 📄 create_california_housing_model.py
     ├── 📄 create_decision_tree_models.py
+    ├── 📄 create_adaboost_models.py
     └── 📄 MODEL_README.md
 ```
 
