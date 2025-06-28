@@ -57,13 +57,13 @@ def create_adaboost_iris_model():
     # Créer et entraîner le modèle AdaBoost
     print("🚀 Entraînement du modèle AdaBoost...")
     
-    # Estimateur de base : DecisionTree avec profondeur limitée (weak learner)
-    base_estimator = DecisionTreeClassifier(max_depth=1, random_state=42)
+    # Estimateur de base : DecisionTree avec profondeur adaptée (weak learner plus fort)
+    base_estimator = DecisionTreeClassifier(max_depth=3, random_state=42)
     
     ada_classifier = AdaBoostClassifier(
         estimator=base_estimator,
-        n_estimators=100,          # Nombre d'estimateurs faibles
-        learning_rate=1.0,         # Taux d'apprentissage
+        n_estimators=200,          # Plus d'estimateurs pour une meilleure performance
+        learning_rate=0.8,         # Taux d'apprentissage ajusté
         algorithm='SAMME',         # Algorithme SAMME
         random_state=42
     )
@@ -117,15 +117,15 @@ def create_adaboost_iris_model():
         'model_type': 'AdaBoostClassifier',
         'features': list(feature_names),
         'target_names': list(target_names),
-        'n_estimators': 100,
-        'learning_rate': 1.0,
+        'n_estimators': 200,
+        'learning_rate': 0.8,
         'accuracy': accuracy,
         'cv_mean_score': cv_scores.mean(),
         'cv_std_score': cv_scores.std(),
         'feature_importance': feature_importance.to_dict('records'),
         'confusion_matrix': cm.tolist(),
         'algorithm': 'SAMME',
-        'base_estimator': 'DecisionTreeClassifier(max_depth=1)'
+        'base_estimator': 'DecisionTreeClassifier(max_depth=3)'
     }
     
     info_path = os.path.join(models_dir, 'adaboost_iris_model_info.pkl')
@@ -172,13 +172,13 @@ def create_adaboost_housing_model():
     # Créer et entraîner le modèle AdaBoost
     print("🚀 Entraînement du modèle AdaBoost...")
     
-    # Estimateur de base : DecisionTree avec profondeur limitée (weak learner)
-    base_estimator = DecisionTreeRegressor(max_depth=4, random_state=42)
+    # Estimateur de base : DecisionTree avec profondeur adaptée (weak learner plus fort)
+    base_estimator = DecisionTreeRegressor(max_depth=6, random_state=42)
     
     ada_regressor = AdaBoostRegressor(
         estimator=base_estimator,
-        n_estimators=100,          # Nombre d'estimateurs faibles
-        learning_rate=1.0,         # Taux d'apprentissage
+        n_estimators=200,          # Plus d'estimateurs pour une meilleure performance
+        learning_rate=0.8,         # Taux d'apprentissage ajusté
         loss='linear',             # Fonction de perte linéaire
         random_state=42
     )
@@ -220,14 +220,14 @@ def create_adaboost_housing_model():
     model_info = {
         'model_type': 'AdaBoostRegressor',
         'features': list(feature_names),
-        'n_estimators': 100,
-        'learning_rate': 1.0,
+        'n_estimators': 200,
+        'learning_rate': 0.8,
         'loss': 'linear',
         'mse': mse,
         'rmse': rmse,
         'r2_score': r2,
         'feature_importance': feature_importance.to_dict('records'),
-        'base_estimator': 'DecisionTreeRegressor(max_depth=4)'
+        'base_estimator': 'DecisionTreeRegressor(max_depth=6)'
     }
     
     info_path = os.path.join(models_dir, 'adaboost_housing_model_info.pkl')

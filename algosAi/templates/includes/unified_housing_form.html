@@ -156,10 +156,16 @@
     {% endif %}
 
     <div class="mt-3">
-        <div class="alert alert-{{ algorithm|lower == 'decision tree' and 'success' or 'info' }}">
+        {% if algorithm == "Decision Tree" %}
+            <div class="alert alert-success">
+        {% else %}
+            <div class="alert alert-info">
+        {% endif %}
             <strong>Avantage {{ algorithm }}:</strong> 
             {% if algorithm == "Decision Tree" %}
                 Contrairement au Random Forest, vous pouvez tracer l'arbre complet et voir toutes les règles de décision !
+            {% elif algorithm == "AdaBoost" %}
+                Boosting adaptatif qui se concentre sur les échantillons difficiles pour améliorer la précision !
             {% else %}
                 Ensemble de multiples arbres pour des prédictions plus robustes et précises !
             {% endif %}

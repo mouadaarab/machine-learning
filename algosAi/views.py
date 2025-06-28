@@ -300,7 +300,7 @@ def adaboost_iris_exemple_tester(request):
     """
     context = {
         'algorithm': 'AdaBoost',
-        'algorithm_info': 'Combine 100 arbres de décision faibles qui s\'adaptent aux échantillons difficiles.',
+        'algorithm_info': 'Combine 200 arbres de décision faibles qui s\'adaptent aux échantillons difficiles.',
         'action_url': reverse('algosAi:adaboost_iris_prediction_results')
     }
     return render(request, 'includes/unified_iris_form.html', context)
@@ -376,7 +376,7 @@ def adaboost_housing_prediction_results(request):
         prediction = adaboost_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
                                              population, ave_occup, latitude, longitude]])
 
-        predicted_price = prediction[0]
+        predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
         inputData = {
             'med_inc': med_inc,
@@ -394,7 +394,7 @@ def adaboost_housing_prediction_results(request):
             'algorithm_description': 'AdaBoost (Adaptive Boosting) combine des arbres de régression faibles qui s\'améliorent progressivement en se concentrant sur les prédictions difficiles.',
             'predicted_price': predicted_price,
             'inputData': inputData,
-            'algorithm_info': 'R² Score: 0.386 - Le revenu médian reste le facteur le plus prédictif.'
+            'algorithm_info': 'R² Score: 0.513 - Performances améliorées avec 200 estimateurs.'
         })
 
 def load_models(name):

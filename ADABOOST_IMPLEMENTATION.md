@@ -40,32 +40,32 @@ L'algorithme **AdaBoost (Adaptive Boosting)** a été ajouté avec succès à la
 ## 🎯 Performances des Modèles
 
 ### 🌸 Classification Iris
-- **Accuracy:** 93.3%
-- **Validation croisée:** 95.3% (±6.8%)
+- **Accuracy:** 96.7%
+- **Validation croisée:** 96.7% (±4.2%)
 - **Features importantes:**
-  - Petal Width: 64.9%
-  - Petal Length: 26.0%
-  - Sepal Length: 5.5%
-  - Sepal Width: 3.6%
+  - Petal Length: 46.6%
+  - Petal Width: 32.8%
+  - Sepal Width: 15.2%
+  - Sepal Length: 5.4%
 
 ### 🏠 Régression California Housing
-- **R² Score:** 0.386
-- **RMSE:** 0.897
-- **MSE:** 0.804
+- **R² Score:** 0.513
+- **RMSE:** 0.799
+- **MSE:** 0.639
 - **Features importantes:**
-  - MedInc (Revenu médian): 27.2%
-  - Longitude: 19.0%
-  - Latitude: 17.6%
-  - AveOccup: 13.1%
+  - MedInc (Revenu médian): 17.7%
+  - Longitude: 16.8%
+  - Latitude: 15.7%
+  - AveOccup: 12.8%
 
 ## ⚙️ Configuration des Modèles
 
 ### Classification (Iris)
 ```python
 AdaBoostClassifier(
-    estimator=DecisionTreeClassifier(max_depth=1),
-    n_estimators=100,
-    learning_rate=1.0,
+    estimator=DecisionTreeClassifier(max_depth=3),
+    n_estimators=200,
+    learning_rate=0.8,
     algorithm='SAMME',
     random_state=42
 )
@@ -74,9 +74,9 @@ AdaBoostClassifier(
 ### Régression (Housing)
 ```python
 AdaBoostRegressor(
-    estimator=DecisionTreeRegressor(max_depth=4),
-    n_estimators=100,
-    learning_rate=1.0,
+    estimator=DecisionTreeRegressor(max_depth=6),
+    n_estimators=200,
+    learning_rate=0.8,
     loss='linear',
     random_state=42
 )
@@ -150,6 +150,36 @@ python scripts/create_adaboost_models.py
 2. **Classification Iris :** `http://localhost:8000/adaboost_iris/`
 3. **Régression Housing :** `http://localhost:8000/adaboost_regression/`
 4. **Tests interactifs :** Accessibles via les boutons "Tester le Modèle"
+
+## 🚀 Optimisations Effectuées
+
+### 📊 Amélioration des Performances
+Les paramètres d'AdaBoost ont été optimisés pour obtenir de meilleures performances :
+
+**Classification Iris :**
+- **Avant :** 93.3% de précision
+- **Après :** 96.7% de précision (+3.4 points)
+
+**Régression Housing :**
+- **Avant :** R² = 0.386
+- **Après :** R² = 0.513 (+32.9% d'amélioration relative)
+
+### ⚙️ Paramètres Optimisés
+1. **Profondeur des arbres de base :**
+   - Classification : max_depth=1 → max_depth=3
+   - Régression : max_depth=4 → max_depth=6
+
+2. **Nombre d'estimateurs :**
+   - n_estimators=100 → n_estimators=200
+
+3. **Taux d'apprentissage :**
+   - learning_rate=1.0 → learning_rate=0.8
+
+### 📈 Impact des Optimisations
+- AdaBoost maintenant **compétitif** avec Random Forest et Decision Tree
+- **Meilleure généralisation** grâce aux weak learners plus expressifs
+- **Convergence améliorée** avec le learning rate ajusté
+- **Stabilité accrue** avec plus d'estimateurs
 
 ## 🎯 Résultat Final
 

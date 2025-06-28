@@ -21,8 +21,8 @@ Ce dossier contient les scripts pour créer et entraîner les modèles de Machin
 ### 🚀 AdaBoost (Les Deux)
 - **`create_adaboost_models.py`** : Crée les modèles AdaBoost pour classification et régression
 - **Performances** :
-  - Iris : 93.3% de précision (excellent avec boosting adaptatif)
-  - California Housing : R² = 0.386
+  - Iris : 96.7% de précision (excellent avec boosting adaptatif)
+  - California Housing : R² = 0.513
 
 ### 📚 Documentation
 - **`MODEL_README.md`** : Documentation détaillée des modèles (si existant)

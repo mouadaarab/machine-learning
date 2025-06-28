@@ -190,8 +190,8 @@ L'application sera accessible à : `http://127.0.0.1:8000`
 - Risque de surapprentissage sur des données bruitées
 
 **Performances :**
-- Iris : 93.3% de précision
-- California Housing : R² = 0.386
+- Iris : 96.7% de précision
+- California Housing : R² = 0.513
 
 ## 📁 Structure du Projet
 
