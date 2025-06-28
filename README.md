@@ -76,7 +76,7 @@ AI Platform Django est une application web éducative qui permet aux utilisateur
 
 ### 1. Cloner le Dépôt
 ```bash
-git clone https://github.com/votre-username/ai-platform-django.git
+git clone https://github.com/mouadaarab/machine-learning.git
 cd ai-platform-django/aiPlateform
 ```
 
@@ -291,7 +291,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 👥 Auteurs
 
-- **Votre Nom** - *Développement initial* - [@votre-github](https://github.com/votre-username)
+- **Votre Nom** - *Développement initial* - [@mouadaarab](https://github.com/mouadaarab)
 
 ## 🙏 Remerciements
 
@@ -307,9 +307,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ## 📞 Contact
 
 Pour toute question ou suggestion :
-- 📧 Email : votre.email@example.com
-- 🐦 Twitter : [@votre-twitter](https://twitter.com/votre-twitter)
-- 💼 LinkedIn : [Votre Profil](https://linkedin.com/in/votre-profil)
+- 📧 Email : mouadaarab@gmail.com
 
 ---
 
