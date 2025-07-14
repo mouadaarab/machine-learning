@@ -393,7 +393,7 @@ def adaboost_housing_prediction_results(request):
             'algorithm': 'AdaBoost',
             'algorithm_description': 'AdaBoost (Adaptive Boosting) combine des arbres de régression faibles qui s\'améliorent progressivement en se concentrant sur les prédictions difficiles.',
             'predicted_price': predicted_price,
-            'inputData': inputData,
+            'input_data': inputData,
             'algorithm_info': 'R² Score: 0.513 - Performances améliorées avec 200 estimateurs.'
         })
 

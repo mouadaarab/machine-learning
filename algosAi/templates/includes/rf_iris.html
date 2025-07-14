@@ -25,13 +25,5 @@
     <div>
         <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-primary col-12">Tester le Modèle RF</a>
     </div>
-
-    <div>
-        {% load static %}
-        <iframe src="{% static 'pdfs/IRIS_example_notebook.pdf' %}" width="100%" height="600px" style="border:1px solid #ccc;">
-            Ce navigateur ne support pas PDFs. Veuillez le télécharger ICI:
-            <a href="{% static 'pdfs/IRIS_example_notebook.pdf' %}">Download PDF</a>
-        </iframe>
-    </div>
 </div>
 {% include "includes/footer.html" %}

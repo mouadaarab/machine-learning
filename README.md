@@ -71,6 +71,16 @@ AI Platform Django est une application web éducative qui permet aux utilisateur
 
 ## 📦 Installation
 
+### 🚀 Installation Rapide
+Utilisez le script de configuration automatique :
+```bash
+git clone https://github.com/mouadaarab/machine-learning.git
+cd ai-platform-django/aiPlateform
+./setup_dev.sh
+```
+
+### 🛠️ Installation Manuelle
+
 ### Prérequis
 - Python 3.8 ou supérieur
 - pip (gestionnaire de packages Python)
@@ -118,6 +128,29 @@ python manage.py collectstatic --noinput
 ```
 
 ### 6. Lancer le Serveur
+```bash
+python manage.py runserver
+```
+
+L'application sera accessible à : `http://127.0.0.1:8000`
+
+## 🛠️ Scripts Utiles
+
+### Nettoyage du Projet
+```bash
+./cleanup.sh    # Supprime les fichiers temporaires, cache Python, .DS_Store
+```
+
+### Configuration de Développement
+```bash
+./setup_dev.sh  # Configuration complète automatique (venv, dépendances, modèles, migrations)
+```
+
+### Tests et Vérifications
+```bash
+python manage.py check        # Vérifier la configuration Django
+python manage.py test         # Lancer les tests (si disponibles)
+```
 ```bash
 python manage.py runserver
 ```
