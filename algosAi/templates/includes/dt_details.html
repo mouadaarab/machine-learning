@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-            </div>
+
     <!-- Avantages et Inconvénients -->
     <div class="row mb-4">
         <div class="col-md-6">
@@ -209,7 +209,7 @@
     </div>
 
     <!-- Performance comparative -->
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-info text-white">
@@ -238,22 +238,18 @@
             </div>
         </div>
     </div>
-</div>
 
-{% include "includes/footer.html" %}
-        </div>
-    </div>
-
+    <!-- Différence avec Random Forest -->
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-dark text-white">
-                    <h4>Différence avec Random Forest</h4>
+                    <h4>🔍 Différence avec Random Forest</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h5>Decision Tree :</h5>
+                            <h5>🌳 Decision Tree :</h5>
                             <ul>
                                 <li>Un seul arbre</li>
                                 <li>Plus simple et rapide</li>
@@ -262,7 +258,7 @@
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <h5>Random Forest :</h5>
+                            <h5>🌲 Random Forest :</h5>
                             <ul>
                                 <li>Ensemble de plusieurs arbres</li>
                                 <li>Plus complexe mais plus robuste</li>
@@ -276,9 +272,11 @@
         </div>
     </div>
 
+    <!-- Boutons de navigation -->
     <div class="mt-4 text-center">
-        <a href="{% url 'algosAi:dt_iris' %}" class="btn btn-success btn-lg me-3">Exemple de Classification</a>
-        <a href="{% url 'algosAi:dt_regression' %}" class="btn btn-primary btn-lg">Exemple de Régression</a>
+        <a href="{% url 'algosAi:dt_iris' %}" class="btn btn-success btn-lg me-3">🌸 Exemple Classification</a>
+        <a href="{% url 'algosAi:dt_regression' %}" class="btn btn-primary btn-lg">🏠 Exemple Régression</a>
     </div>
 </div>
+
 {% include "includes/footer.html" %}

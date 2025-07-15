@@ -17,7 +17,7 @@ Variables requises:
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ details_url }}">{{ algo_name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url details_url %}">{{ algo_name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">Régression Housing</li>
         </ol>
     </nav>
@@ -39,15 +39,15 @@ Variables requises:
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <a href="{{ details_url }}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                            <a href="{% url details_url %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
                         </div>
                         {% if iris_url %}
                         <div class="col-md-3 mb-2">
-                            <a href="{{ iris_url }}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                            <a href="{% url iris_url %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
                         </div>
                         {% endif %}
                         <div class="col-md-3 mb-2">
-                            <a href="{{ test_url }}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                            <a href="{% url test_url %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
                         </div>
                         <div class="col-md-3 mb-2">
                             <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
@@ -202,7 +202,7 @@ Variables requises:
         <h4>🚀 Prêt à tester ?</h4>
         <p><strong>Le modèle {{ algo_name }} entraîné est sauvegardé et prêt à être utilisé !</strong></p>
         <p>Testez le modèle en saisissant les caractéristiques d'un district pour prédire le prix médian des logements.</p>
-        <a href="{{ test_url }}" class="btn btn-success btn-lg">🧪 Tester le Modèle {{ algo_name }}</a>
+        <a href="{% url test_url %}" class="btn btn-success btn-lg">🧪 Tester le Modèle {{ algo_name }}</a>
     </div>
 </div>
 

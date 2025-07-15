@@ -101,42 +101,69 @@ def rf_housing_exemple_tester(request):
 
 def rf_housing_prediction_results(request):
     if request.method == 'POST':
-        med_inc = float(request.POST.get('med_inc'))
-        house_age = float(request.POST.get('house_age'))
-        ave_rooms = float(request.POST.get('ave_rooms'))
-        ave_bedrms = float(request.POST.get('ave_bedrms'))
-        population = float(request.POST.get('population'))
-        ave_occup = float(request.POST.get('ave_occup'))
-        latitude = float(request.POST.get('latitude'))
-        longitude = float(request.POST.get('longitude'))
+        try:
+            # Validation et conversion des données POST
+            med_inc = request.POST.get('med_inc')
+            house_age = request.POST.get('house_age')
+            ave_rooms = request.POST.get('ave_rooms')
+            ave_bedrms = request.POST.get('ave_bedrms')
+            population = request.POST.get('population')
+            ave_occup = request.POST.get('ave_occup')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
+            
+            # Vérifier que toutes les valeurs sont présentes
+            required_fields = [med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]
+            if any(field is None or field == '' for field in required_fields):
+                raise ValueError("Tous les champs sont requis")
+            
+            # Conversion en float
+            med_inc = float(med_inc)
+            house_age = float(house_age)
+            ave_rooms = float(ave_rooms)
+            ave_bedrms = float(ave_bedrms)
+            population = float(population)
+            ave_occup = float(ave_occup)
+            latitude = float(latitude)
+            longitude = float(longitude)
 
-        rf_loaded = load_models('california_housing_rf_model.pkl')
-        prediction = rf_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
-                                       population, ave_occup, latitude, longitude]])
+            rf_loaded = load_models('california_housing_rf_model.pkl')
+            prediction = rf_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
+                                           population, ave_occup, latitude, longitude]])
 
-        predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
+            predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
-        inputData = {
-            'med_inc': med_inc,
-            'house_age': house_age,
-            'ave_rooms': ave_rooms,
-            'ave_bedrms': ave_bedrms,
-            'population': population,
-            'ave_occup': ave_occup,
-            'latitude': latitude,
-            'longitude': longitude
-        }
+            inputData = {
+                'med_inc': med_inc,
+                'house_age': house_age,
+                'ave_rooms': ave_rooms,
+                'ave_bedrms': ave_bedrms,
+                'population': population,
+                'ave_occup': ave_occup,
+                'latitude': latitude,
+                'longitude': longitude
+            }
 
-        data = {
-            'predicted_price': predicted_price,
-            'input_data': inputData,
-            'algorithm': 'Random Forest',
-            'form_url': reverse('algosAi:rf_housing_exemple_tester'),
-            'details_url': reverse('algosAi:rf_regression')
-        }
+            data = {
+                'predicted_price': predicted_price,
+                'input_data': inputData,
+                'algorithm': 'Random Forest',
+                'form_url': reverse('algosAi:rf_housing_exemple_tester'),
+                'details_url': reverse('algosAi:rf_regression')
+            }
 
-        # Render the unified results template with the prediction
-        return render(request, 'includes/unified_housing_results.html', data)
+            # Render the unified results template with the prediction
+            return render(request, 'includes/unified_housing_results.html', data)
+            
+        except (ValueError, TypeError) as e:
+            # En cas d'erreur, retourner au formulaire avec un message d'erreur
+            context = {
+                'algorithm': 'Random Forest',
+                'algorithm_info': 'Le revenu médian est le facteur le plus important (59.7% d\'importance) parmi 100 arbres.',
+                'action_url': reverse('algosAi:rf_housing_prediction_results'),
+                'error_message': 'Erreur: Veuillez remplir tous les champs avec des valeurs numériques valides.'
+            }
+            return render(request, 'includes/unified_housing_form.html', context)
 
     # If the request method is not POST, render the form again
     return render(request, 'includes/unified_housing_form.html', {
@@ -237,42 +264,69 @@ def dt_housing_exemple_tester(request):
 
 def dt_housing_prediction_results(request):
     if request.method == 'POST':
-        med_inc = float(request.POST.get('med_inc'))
-        house_age = float(request.POST.get('house_age'))
-        ave_rooms = float(request.POST.get('ave_rooms'))
-        ave_bedrms = float(request.POST.get('ave_bedrms'))
-        population = float(request.POST.get('population'))
-        ave_occup = float(request.POST.get('ave_occup'))
-        latitude = float(request.POST.get('latitude'))
-        longitude = float(request.POST.get('longitude'))
+        try:
+            # Validation et conversion des données POST
+            med_inc = request.POST.get('med_inc')
+            house_age = request.POST.get('house_age')
+            ave_rooms = request.POST.get('ave_rooms')
+            ave_bedrms = request.POST.get('ave_bedrms')
+            population = request.POST.get('population')
+            ave_occup = request.POST.get('ave_occup')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
+            
+            # Vérifier que toutes les valeurs sont présentes
+            required_fields = [med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]
+            if any(field is None or field == '' for field in required_fields):
+                raise ValueError("Tous les champs sont requis")
+            
+            # Conversion en float
+            med_inc = float(med_inc)
+            house_age = float(house_age)
+            ave_rooms = float(ave_rooms)
+            ave_bedrms = float(ave_bedrms)
+            population = float(population)
+            ave_occup = float(ave_occup)
+            latitude = float(latitude)
+            longitude = float(longitude)
 
-        dt_loaded = load_models('decision_tree_housing_model.pkl')
-        prediction = dt_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
-                                       population, ave_occup, latitude, longitude]])
+            dt_loaded = load_models('decision_tree_housing_model.pkl')
+            prediction = dt_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
+                                           population, ave_occup, latitude, longitude]])
 
-        predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
+            predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
-        inputData = {
-            'med_inc': med_inc,
-            'house_age': house_age,
-            'ave_rooms': ave_rooms,
-            'ave_bedrms': ave_bedrms,
-            'population': population,
-            'ave_occup': ave_occup,
-            'latitude': latitude,
-            'longitude': longitude
-        }
+            inputData = {
+                'med_inc': med_inc,
+                'house_age': house_age,
+                'ave_rooms': ave_rooms,
+                'ave_bedrms': ave_bedrms,
+                'population': population,
+                'ave_occup': ave_occup,
+                'latitude': latitude,
+                'longitude': longitude
+            }
 
-        data = {
-            'predicted_price': predicted_price,
-            'input_data': inputData,
-            'algorithm': 'Decision Tree',
-            'form_url': reverse('algosAi:dt_housing_exemple_tester'),
-            'details_url': reverse('algosAi:dt_regression')
-        }
+            data = {
+                'predicted_price': predicted_price,
+                'input_data': inputData,
+                'algorithm': 'Decision Tree',
+                'form_url': reverse('algosAi:dt_housing_exemple_tester'),
+                'details_url': reverse('algosAi:dt_regression')
+            }
 
-        # Render the unified results template with the prediction
-        return render(request, 'includes/unified_housing_results.html', data)
+            # Render the unified results template with the prediction
+            return render(request, 'includes/unified_housing_results.html', data)
+            
+        except (ValueError, TypeError) as e:
+            # En cas d'erreur, retourner au formulaire avec un message d'erreur
+            context = {
+                'algorithm': 'Decision Tree',
+                'algorithm_info': 'Le revenu médian (MedInc) est le facteur le plus important (61.8% d\'importance) !',
+                'action_url': reverse('algosAi:dt_housing_prediction_results'),
+                'error_message': 'Erreur: Veuillez remplir tous les champs avec des valeurs numériques valides.'
+            }
+            return render(request, 'includes/unified_housing_form.html', context)
 
     # If the request method is not POST, render the form again
     return render(request, 'includes/unified_housing_form.html', {
@@ -363,39 +417,66 @@ def adaboost_housing_exemple_tester(request):
 
 def adaboost_housing_prediction_results(request):
     if request.method == 'POST':
-        med_inc = float(request.POST.get('med_inc'))
-        house_age = float(request.POST.get('house_age'))
-        ave_rooms = float(request.POST.get('ave_rooms'))
-        ave_bedrms = float(request.POST.get('ave_bedrms'))
-        population = float(request.POST.get('population'))
-        ave_occup = float(request.POST.get('ave_occup'))
-        latitude = float(request.POST.get('latitude'))
-        longitude = float(request.POST.get('longitude'))
+        try:
+            # Validation et conversion des données POST
+            med_inc = request.POST.get('med_inc')
+            house_age = request.POST.get('house_age')
+            ave_rooms = request.POST.get('ave_rooms')
+            ave_bedrms = request.POST.get('ave_bedrms')
+            population = request.POST.get('population')
+            ave_occup = request.POST.get('ave_occup')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
+            
+            # Vérifier que toutes les valeurs sont présentes
+            required_fields = [med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]
+            if any(field is None or field == '' for field in required_fields):
+                raise ValueError("Tous les champs sont requis")
+            
+            # Conversion en float
+            med_inc = float(med_inc)
+            house_age = float(house_age)
+            ave_rooms = float(ave_rooms)
+            ave_bedrms = float(ave_bedrms)
+            population = float(population)
+            ave_occup = float(ave_occup)
+            latitude = float(latitude)
+            longitude = float(longitude)
 
-        adaboost_loaded = load_models('adaboost_housing_model.pkl')
-        prediction = adaboost_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
-                                             population, ave_occup, latitude, longitude]])
+            adaboost_loaded = load_models('adaboost_housing_model.pkl')
+            prediction = adaboost_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, 
+                                                 population, ave_occup, latitude, longitude]])
 
-        predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
+            predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
-        inputData = {
-            'med_inc': med_inc,
-            'house_age': house_age,
-            'ave_rooms': ave_rooms,
-            'ave_bedrms': ave_bedrms,
-            'population': population,
-            'ave_occup': ave_occup,
-            'latitude': latitude,
-            'longitude': longitude
-        }
+            inputData = {
+                'med_inc': med_inc,
+                'house_age': house_age,
+                'ave_rooms': ave_rooms,
+                'ave_bedrms': ave_bedrms,
+                'population': population,
+                'ave_occup': ave_occup,
+                'latitude': latitude,
+                'longitude': longitude
+            }
 
-        return render(request, 'includes/unified_housing_results.html', {
-            'algorithm': 'AdaBoost',
-            'algorithm_description': 'AdaBoost (Adaptive Boosting) combine des arbres de régression faibles qui s\'améliorent progressivement en se concentrant sur les prédictions difficiles.',
-            'predicted_price': predicted_price,
-            'input_data': inputData,
-            'algorithm_info': 'R² Score: 0.513 - Performances améliorées avec 200 estimateurs.'
-        })
+            return render(request, 'includes/unified_housing_results.html', {
+                'algorithm': 'AdaBoost',
+                'algorithm_description': 'AdaBoost (Adaptive Boosting) combine des arbres de régression faibles qui s\'améliorent progressivement en se concentrant sur les prédictions difficiles.',
+                'predicted_price': predicted_price,
+                'input_data': inputData,
+                'algorithm_info': 'R² Score: 0.513 - Performances améliorées avec 200 estimateurs.'
+            })
+            
+        except (ValueError, TypeError) as e:
+            # En cas d'erreur, retourner au formulaire avec un message d'erreur
+            context = {
+                'algorithm': 'AdaBoost',
+                'algorithm_info': 'Apprentissage adaptatif avec 200 arbres faibles - Focus sur les erreurs difficiles.',
+                'action_url': reverse('algosAi:adaboost_housing_prediction_results'),
+                'error_message': 'Erreur: Veuillez remplir tous les champs avec des valeurs numériques valides.'
+            }
+            return render(request, 'includes/unified_housing_form.html', context)
 
 def load_models(name):
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -500,38 +581,67 @@ def xgb_housing_exemple_tester(request):
 
 def xgb_housing_prediction_results(request):
     if request.method == 'POST':
-        MedInc = float(request.POST.get('MedInc'))
-        HouseAge = float(request.POST.get('HouseAge'))
-        AveRooms = float(request.POST.get('AveRooms'))
-        AveBedrms = float(request.POST.get('AveBedrms'))
-        Population = float(request.POST.get('Population'))
-        AveOccup = float(request.POST.get('AveOccup'))
-        Latitude = float(request.POST.get('Latitude'))
-        Longitude = float(request.POST.get('Longitude'))
+        try:
+            # Validation et conversion des données POST
+            med_inc = request.POST.get('med_inc')
+            house_age = request.POST.get('house_age')
+            ave_rooms = request.POST.get('ave_rooms')
+            ave_bedrms = request.POST.get('ave_bedrms')
+            population = request.POST.get('population')
+            ave_occup = request.POST.get('ave_occup')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
+            
+            # Vérifier que toutes les valeurs sont présentes
+            required_fields = [med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]
+            if any(field is None or field == '' for field in required_fields):
+                raise ValueError("Tous les champs sont requis")
+            
+            # Conversion en float
+            med_inc = float(med_inc)
+            house_age = float(house_age)
+            ave_rooms = float(ave_rooms)
+            ave_bedrms = float(ave_bedrms)
+            population = float(population)
+            ave_occup = float(ave_occup)
+            latitude = float(latitude)
+            longitude = float(longitude)
 
-        xgb_loaded = load_models('xgboost_housing_model.pkl')
-        prediction = xgb_loaded.predict([[MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude]])
+            xgb_loaded = load_models('xgboost_housing_model.pkl')
+            prediction = xgb_loaded.predict([[med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]])
 
-        predicted_price = prediction[0] * 100  # Convert to thousands
+            predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
-        inputData = {
-            'MedInc': MedInc,
-            'HouseAge': HouseAge,
-            'AveRooms': AveRooms,
-            'AveBedrms': AveBedrms,
-            'Population': Population,
-            'AveOccup': AveOccup,
-            'Latitude': Latitude,
-            'Longitude': Longitude
-        }
+            inputData = {
+                'med_inc': med_inc,
+                'house_age': house_age,
+                'ave_rooms': ave_rooms,
+                'ave_bedrms': ave_bedrms,
+                'population': population,
+                'ave_occup': ave_occup,
+                'latitude': latitude,
+                'longitude': longitude
+            }
 
-        data = {
-            'predicted_price': f"${predicted_price:,.0f}",
-            'input_data': inputData,
-            'algorithm': 'XGBoost',
-            'form_url': reverse('algosAi:xgb_housing_exemple_tester'),
-            'details_url': reverse('algosAi:xgb_regression')
-        }
+            data = {
+                'predicted_price': predicted_price,
+                'input_data': inputData,
+                'algorithm': 'XGBoost',
+                'form_url': reverse('algosAi:xgb_housing_exemple_tester'),
+                'details_url': reverse('algosAi:xgb_regression')
+            }
+
+            return render(request, 'includes/unified_housing_results.html', data)
+            
+        except (ValueError, TypeError) as e:
+            # En cas d'erreur, retourner au formulaire avec un message d'erreur
+            context = {
+                'algorithm': 'XGBoost',
+                'algorithm_info': 'Gradient Boosting optimisé - Meilleur R² score (83.1%) grâce au boosting avancé.',
+                'action_url': reverse('algosAi:xgb_housing_prediction_results'),
+                'error_message': 'Erreur: Veuillez remplir tous les champs avec des valeurs numériques valides.'
+            }
+            return render(request, 'includes/unified_housing_form.html', context)
 
         return render(request, 'includes/unified_housing_results.html', data)
 
@@ -640,45 +750,72 @@ def svm_housing_exemple_tester(request):
 
 def svm_housing_prediction_results(request):
     if request.method == 'POST':
-        MedInc = float(request.POST.get('MedInc'))
-        HouseAge = float(request.POST.get('HouseAge'))
-        AveRooms = float(request.POST.get('AveRooms'))
-        AveBedrms = float(request.POST.get('AveBedrms'))
-        Population = float(request.POST.get('Population'))
-        AveOccup = float(request.POST.get('AveOccup'))
-        Latitude = float(request.POST.get('Latitude'))
-        Longitude = float(request.POST.get('Longitude'))
+        try:
+            # Validation et conversion des données POST
+            med_inc = request.POST.get('med_inc')
+            house_age = request.POST.get('house_age')
+            ave_rooms = request.POST.get('ave_rooms')
+            ave_bedrms = request.POST.get('ave_bedrms')
+            population = request.POST.get('population')
+            ave_occup = request.POST.get('ave_occup')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
+            
+            # Vérifier que toutes les valeurs sont présentes
+            required_fields = [med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]
+            if any(field is None or field == '' for field in required_fields):
+                raise ValueError("Tous les champs sont requis")
+            
+            # Conversion en float
+            med_inc = float(med_inc)
+            house_age = float(house_age)
+            ave_rooms = float(ave_rooms)
+            ave_bedrms = float(ave_bedrms)
+            population = float(population)
+            ave_occup = float(ave_occup)
+            latitude = float(latitude)
+            longitude = float(longitude)
 
-        # Load both model and scaler for SVM
-        svm_loaded = load_models('svm_housing_model.pkl')
-        scaler_loaded = load_models('svm_housing_scaler.pkl')
-        
-        # Scale the input data
-        input_data_scaled = scaler_loaded.transform([[MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude]])
-        prediction = svm_loaded.predict(input_data_scaled)
+            # Load both model and scaler for SVM
+            svm_loaded = load_models('svm_housing_model.pkl')
+            scaler_loaded = load_models('svm_housing_scaler.pkl')
+            
+            # Scale the input data
+            input_data_scaled = scaler_loaded.transform([[med_inc, house_age, ave_rooms, ave_bedrms, population, ave_occup, latitude, longitude]])
+            prediction = svm_loaded.predict(input_data_scaled)
 
-        predicted_price = prediction[0] * 100  # Convert to thousands
+            predicted_price = round(prediction[0] * 100000, 2)  # Convert to dollars
 
-        inputData = {
-            'MedInc': MedInc,
-            'HouseAge': HouseAge,
-            'AveRooms': AveRooms,
-            'AveBedrms': AveBedrms,
-            'Population': Population,
-            'AveOccup': AveOccup,
-            'Latitude': Latitude,
-            'Longitude': Longitude
-        }
+            inputData = {
+                'med_inc': med_inc,
+                'house_age': house_age,
+                'ave_rooms': ave_rooms,
+                'ave_bedrms': ave_bedrms,
+                'population': population,
+                'ave_occup': ave_occup,
+                'latitude': latitude,
+                'longitude': longitude
+            }
 
-        data = {
-            'predicted_price': f"${predicted_price:,.0f}",
-            'input_data': inputData,
-            'algorithm': 'SVM',
-            'form_url': reverse('algosAi:svm_housing_exemple_tester'),
-            'details_url': reverse('algosAi:svm_regression')
-        }
+            data = {
+                'predicted_price': predicted_price,
+                'input_data': inputData,
+                'algorithm': 'SVM',
+                'form_url': reverse('algosAi:svm_housing_exemple_tester'),
+                'details_url': reverse('algosAi:svm_regression')
+            }
 
-        return render(request, 'includes/unified_housing_results.html', data)
+            return render(request, 'includes/unified_housing_results.html', data)
+            
+        except (ValueError, TypeError) as e:
+            # En cas d'erreur, retourner au formulaire avec un message d'erreur
+            context = {
+                'algorithm': 'SVM',
+                'algorithm_info': 'Support Vector Regression avec kernel RBF - Optimise la marge pour la régression.',
+                'action_url': reverse('algosAi:svm_housing_prediction_results'),
+                'error_message': 'Erreur: Veuillez remplir tous les champs avec des valeurs numériques valides.'
+            }
+            return render(request, 'includes/unified_housing_form.html', context)
 
     return render(request, 'includes/unified_housing_form.html', {
         'algorithm': 'SVM',
