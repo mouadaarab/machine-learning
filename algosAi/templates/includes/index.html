@@ -1,61 +1,168 @@
 {% include "includes/header.html" %}
 {% load static %}
 <div class="container">
-    <h2 class="mb-4">Les Algorithmes</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h2 class="mb-4">Les Algorithmes de Machine Learning</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4">
         <div class="col">
             <div class="card h-100">
-                <h5 class="card-header">Algorithme Random Forest</h5>
+                <h5 class="card-header bg-success text-white">🌳 Random Forest</h5>
                 <div class="card-body">
-                    <img src="{% static 'images/RF.jpg' %}" class="card-img-top" alt="Random Forest">
+                    <img src="{% static 'images/RF.jpg' %}" class="card-img-top" alt="Random Forest" style="height: 150px; object-fit: cover;">
                     <div class="card-text mt-3">
-                        <p>
-                            L'algorithme Random Forest est un algorithme d'apprentissage ensembliste qui construit une multitude d'arbres de décision lors de I'entraînement
+                        <p class="small">
+                            Algorithme d'apprentissage ensembliste qui construit une multitude d'arbres de décision
                         </p>
                     </div>
                 </div>
                 <div class="card-footer center">
-                    <a class="btn btn-info col-12 mt-2" href="{% url 'algosAi:rf_details' %}">Plus détails</a>
-                    <a class="btn btn-success col-12 mt-2" href="{% url 'algosAi:rf_iris' %}">Exemple de Classification</a>
-                    <a class="btn btn-primary col-12 mt-2" href="{% url 'algosAi:rf_regression' %}">Exemple de Régression</a>
+                    <a class="btn btn-info btn-sm col-12 mt-1" href="{% url 'algosAi:rf_details' %}">Plus détails</a>
+                    <a class="btn btn-success btn-sm col-12 mt-1" href="{% url 'algosAi:rf_iris' %}">Classification</a>
+                    <a class="btn btn-primary btn-sm col-12 mt-1" href="{% url 'algosAi:rf_regression' %}">Régression</a>
                 </div>
             </div>
         </div>
         
         <div class="col">
             <div class="card h-100">
-                <h5 class="card-header">Algorithme Decision Tree</h5>
+                <h5 class="card-header bg-warning text-dark">🌿 Decision Tree</h5>
                 <div class="card-body">
-                    <img src="{% static 'images/decision_tree.jpg' %}" class="card-img-top" alt="Decision Tree">
+                    <img src="{% static 'images/decision_tree.jpg' %}" class="card-img-top" alt="Decision Tree" style="height: 150px; object-fit: cover;">
                     <div class="card-text mt-3">
-                        <p>
-                            L'algorithme Decision Tree crée un modèle prédictif sous forme d'arbre de décision avec des règles simples et interprétables
+                        <p class="small">
+                            Modèle prédictif sous forme d'arbre de décision avec des règles simples et interprétables
                         </p>
                     </div>
                 </div>
                 <div class="card-footer center">
-                    <a class="btn btn-info col-12 mt-2" href="{% url 'algosAi:dt_details' %}">Plus détails</a>
-                    <a class="btn btn-success col-12 mt-2" href="{% url 'algosAi:dt_iris' %}">Exemple de Classification</a>
-                    <a class="btn btn-primary col-12 mt-2" href="{% url 'algosAi:dt_regression' %}">Exemple de Régression</a>
+                    <a class="btn btn-info btn-sm col-12 mt-1" href="{% url 'algosAi:dt_details' %}">Plus détails</a>
+                    <a class="btn btn-success btn-sm col-12 mt-1" href="{% url 'algosAi:dt_iris' %}">Classification</a>
+                    <a class="btn btn-primary btn-sm col-12 mt-1" href="{% url 'algosAi:dt_regression' %}">Régression</a>
                 </div>
             </div>
         </div>
         
         <div class="col">
             <div class="card h-100">
-                <h5 class="card-header">Algorithme AdaBoost</h5>
+                <h5 class="card-header bg-secondary text-white">🚀 AdaBoost</h5>
                 <div class="card-body">
-                    <img src="{% static 'images/AB.png' %}" class="card-img-top" alt="AdaBoost" style="height: 200px; object-fit: cover;">
+                    <img src="{% static 'images/AB.png' %}" class="card-img-top" alt="AdaBoost" style="height: 150px; object-fit: cover;">
                     <div class="card-text mt-3">
-                        <p>
-                            L'algorithme AdaBoost (Adaptive Boosting) combine plusieurs apprenants faibles pour créer un modèle robuste qui s'adapte aux erreurs
+                        <p class="small">
+                            Adaptive Boosting qui combine plusieurs apprenants faibles pour créer un modèle robuste
                         </p>
                     </div>
                 </div>
                 <div class="card-footer center">
-                    <a class="btn btn-info col-12 mt-2" href="{% url 'algosAi:adaboost_details' %}">Plus détails</a>
-                    <a class="btn btn-success col-12 mt-2" href="{% url 'algosAi:adaboost_iris' %}">Exemple de Classification</a>
-                    <a class="btn btn-primary col-12 mt-2" href="{% url 'algosAi:adaboost_regression' %}">Exemple de Régression</a>
+                    <a class="btn btn-info btn-sm col-12 mt-1" href="{% url 'algosAi:adaboost_details' %}">Plus détails</a>
+                    <a class="btn btn-success btn-sm col-12 mt-1" href="{% url 'algosAi:adaboost_iris' %}">Classification</a>
+                    <a class="btn btn-primary btn-sm col-12 mt-1" href="{% url 'algosAi:adaboost_regression' %}">Régression</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <h5 class="card-header bg-danger text-white">⚡ XGBoost</h5>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 150px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); border-radius: 8px;">
+                        <h1 class="text-white">⚡</h1>
+                    </div>
+                    <div class="card-text mt-3">
+                        <p class="small">
+                            Extreme Gradient Boosting - algorithme optimisé pour la performance et la vitesse
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer center">
+                    <a class="btn btn-info btn-sm col-12 mt-1" href="{% url 'algosAi:xgb_details' %}">Plus détails</a>
+                    <a class="btn btn-success btn-sm col-12 mt-1" href="{% url 'algosAi:xgb_iris' %}">Classification</a>
+                    <a class="btn btn-primary btn-sm col-12 mt-1" href="{% url 'algosAi:xgb_regression' %}">Régression</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <h5 class="card-header bg-info text-white">🎯 SVM</h5>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 150px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 8px;">
+                        <h1 class="text-white">🎯</h1>
+                    </div>
+                    <div class="card-text mt-3">
+                        <p class="small">
+                            Support Vector Machine - trouve la frontière optimale avec marge maximale
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer center">
+                    <a class="btn btn-info btn-sm col-12 mt-1" href="{% url 'algosAi:svm_details' %}">Plus détails</a>
+                    <a class="btn btn-success btn-sm col-12 mt-1" href="{% url 'algosAi:svm_iris' %}">Classification</a>
+                    <a class="btn btn-primary btn-sm col-12 mt-1" href="{% url 'algosAi:svm_regression' %}">Régression</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>📊 Comparaison des Performances</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Algorithme</th>
+                                    <th>Iris (Accuracy)</th>
+                                    <th>California Housing (R²)</th>
+                                    <th>Complexité</th>
+                                    <th>Vitesse</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-success">🌳</span> Random Forest</td>
+                                    <td>90.0%</td>
+                                    <td>77.5%</td>
+                                    <td>Moyenne</td>
+                                    <td>Rapide</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning text-dark">🌿</span> Decision Tree</td>
+                                    <td>100% 🏆</td>
+                                    <td>68.9%</td>
+                                    <td>Faible</td>
+                                    <td>Très rapide</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-secondary">🚀</span> AdaBoost</td>
+                                    <td>96.7%</td>
+                                    <td>51.3%</td>
+                                    <td>Moyenne</td>
+                                    <td>Moyenne</td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><span class="badge bg-danger">⚡</span> <strong>XGBoost</strong></td>
+                                    <td><strong>90.0%</strong></td>
+                                    <td><strong>83.1% 🏆</strong></td>
+                                    <td><strong>Élevée</strong></td>
+                                    <td><strong>Moyenne</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-info">🎯</span> SVM</td>
+                                    <td>96.7% 🏆</td>
+                                    <td>72.8%</td>
+                                    <td>Élevée</td>
+                                    <td>Lente</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-muted">
+                        <small>🏆 Meilleur score par catégorie. XGBoost excelle en régression, Decision Tree et SVM en classification.</small>
+                    </p>
                 </div>
             </div>
         </div>

@@ -1,4 +1,32 @@
-# 🧠 Scripts de Création des Modèles ML
+# 🧠 S### 🌳 Random Forest (Les Deux)
+- **`create_random_forest_models.py`** : Crée les modèles Random Forest pour classification et régression
+- **Performances** :
+  - Iris : 90% de précision (très bon avec ensemble d'arbres)
+  - California Housing : R² = 0.775 sur le test set
+
+### 🌿 Decision Tree (Les Deux)
+- **`create_decision_tree_models.py`** : Crée les modèles Decision Tree pour classification et régression
+- **Performances** :
+  - Iris : 100% de précision (parfait sur ce dataset simple)
+  - California Housing : R² = 0.689
+
+### 🚀 AdaBoost (Les Deux)
+- **`create_adaboost_models.py`** : Crée les modèles AdaBoost pour classification et régression
+- **Performances** :
+  - Iris : 96.7% de précision (excellent avec boosting adaptatif)
+  - California Housing : R² = 0.513
+
+### ⚡ XGBoost (Les Deux)
+- **`create_xgboost_models.py`** : Crée les modèles XGBoost pour classification et régression
+- **Performances** :
+  - Iris : 90% de précision (gradient boosting optimisé)
+  - California Housing : R² = 0.831 (meilleur score!)
+
+### 🎯 SVM (Les Deux)
+- **`create_svm_models.py`** : Crée les modèles SVM pour classification et régression
+- **Performances** :
+  - Iris : 96.7% de précision (excellent avec kernel RBF)
+  - California Housing : R² = 0.728 (bon avec normalisation)n des Modèles ML
 
 Ce dossier contient les scripts pour créer et entraîner les modèles de Machine Learning utilisés dans l'application.
 
@@ -40,6 +68,12 @@ python scripts/create_decision_tree_models.py
 
 # Modèles AdaBoost
 python scripts/create_adaboost_models.py
+
+# Modèles XGBoost
+python scripts/create_xgboost_models.py
+
+# Modèles SVM
+python scripts/create_svm_models.py
 ```
 
 ### Que Font les Scripts ?

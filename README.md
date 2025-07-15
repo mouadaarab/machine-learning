@@ -33,9 +33,11 @@ AI Platform Django est une application web éducative qui permet aux utilisateur
 ## ✨ Fonctionnalités
 
 ### 🔬 Algorithmes de Machine Learning
-- **Random Forest** : Classification et Régression
+- **Random Forest** : Classification et Régression avec ensemble d'arbres
 - **Decision Tree** : Classification et Régression avec règles interprétables
 - **AdaBoost** : Classification et Régression avec boosting adaptatif
+- **XGBoost** : Classification et Régression avec gradient boosting optimisé
+- **SVM** : Classification et Régression avec marge maximale
 
 ### 📊 Exemples Interactifs
 - **Classification Iris** : Prédiction d'espèces de fleurs
@@ -60,6 +62,7 @@ AI Platform Django est une application web éducative qui permet aux utilisateur
 
 ### Machine Learning
 - **scikit-learn** : Bibliothèque de Machine Learning
+- **XGBoost** : Gradient boosting optimisé
 - **NumPy** : Calculs numériques
 - **Pandas** : Manipulation de données
 - **Joblib** : Sérialisation des modèles
@@ -194,8 +197,8 @@ L'application sera accessible à : `http://127.0.0.1:8000`
 - Plus complexe computationnellement
 
 **Performances :**
-- Iris : ~97% de précision
-- California Housing : R² = 0.77
+- Iris : 90% de précision
+- California Housing : R² = 0.775
 
 ### 🌲 Decision Tree
 **Avantages :**
@@ -209,7 +212,7 @@ L'application sera accessible à : `http://127.0.0.1:8000`
 
 **Performances :**
 - Iris : 100% de précision sur le test
-- California Housing : R² = 0.69
+- California Housing : R² = 0.689
 
 ### 🚀 AdaBoost (Adaptive Boosting)
 **Avantages :**
@@ -225,6 +228,39 @@ L'application sera accessible à : `http://127.0.0.1:8000`
 **Performances :**
 - Iris : 96.7% de précision
 - California Housing : R² = 0.513
+
+### ⚡ XGBoost (Extreme Gradient Boosting)
+**Avantages :**
+- Performances exceptionnelles
+- Optimisations avancées (parallélisation)
+- Régularisation intégrée
+- Gestion automatique des valeurs manquantes
+
+**Inconvénients :**
+- Nombreux hyperparamètres
+- Temps d'entraînement plus long
+- Modèle "boîte noire"
+
+**Performances :**
+- Iris : 90% de précision
+- California Housing : R² = 0.831 🏆 (Meilleur score!)
+
+### 🎯 SVM (Support Vector Machine)
+**Avantages :**
+- Efficace dans les espaces de haute dimension
+- Mémoire efficace (vecteurs de support)
+- Polyvalent avec différents kernels
+- Robuste aux outliers
+
+**Inconvénients :**
+- Sensible à la mise à l'échelle des features
+- Choix du kernel et hyperparamètres crucial
+- Pas de sortie probabiliste directe
+- Lent sur gros datasets
+
+**Performances :**
+- Iris : 96.7% de précision
+- California Housing : R² = 0.728
 
 ## 📁 Structure du Projet
 

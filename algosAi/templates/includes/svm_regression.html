@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVM - Régression California Housing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+{% include 'includes/header.html' %}
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center mb-4">🎯 SVM - Prédiction des Prix Immobiliers</h1>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>🏠 À propos du Dataset California Housing</h3>
+                        <p>
+                            Ce dataset contient des informations sur 20,640 districts de Californie avec 8 features 
+                            pour prédire la valeur médiane des maisons (en centaines de milliers de dollars).
+                        </p>
+                        
+                        <h4>🎯 Modèle SVM :</h4>
+                        <ul>
+                            <li><strong>Algorithme :</strong> Support Vector Regression (SVR)</li>
+                            <li><strong>Kernel :</strong> RBF (Radial Basis Function)</li>
+                            <li><strong>Paramètre C :</strong> 1.0</li>
+                            <li><strong>Epsilon :</strong> 0.1 (tube de tolérance)</li>
+                            <li><strong>R² Score :</strong> 72.8%</li>
+                            <li><strong>RMSE :</strong> 0.60 (centaines de milliers $)</li>
+                        </ul>
+
+                        <h4>📊 Vecteurs de Support :</h4>
+                        <div class="alert alert-info">
+                            <strong>12,814 vecteurs de support</strong> sur 16,512 échantillons d'entraînement (~78%)
+                            <br><small>Un nombre élevé indique une complexité importante dans les relations prix-features.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4>🔧 Spécificités de SVR :</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Tube epsilon (ε = 0.1)</h5>
+                                <p>
+                                    SVR tolère les erreurs dans un "tube" de ±$10k autour de la prédiction. 
+                                    Les points en dehors de ce tube deviennent des vecteurs de support.
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Normalisation cruciale</h5>
+                                <p>
+                                    Les features sont normalisées (moyenne=0, écart-type=1) car SVM est 
+                                    très sensible à l'échelle des données.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4>📊 Comparaison des Performances</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Algorithme</th>
+                                    <th>R² Score</th>
+                                    <th>RMSE</th>
+                                    <th>Complexité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>XGBoost</td>
+                                    <td>83.1%</td>
+                                    <td>0.47</td>
+                                    <td>Élevée</td>
+                                </tr>
+                                <tr>
+                                    <td>Random Forest</td>
+                                    <td>77.5%</td>
+                                    <td>0.54</td>
+                                    <td>Moyenne</td>
+                                </tr>
+                                <tr class="table-warning">
+                                    <td><strong>SVM</strong></td>
+                                    <td><strong>72.8%</strong></td>
+                                    <td><strong>0.60</strong></td>
+                                    <td><strong>Élevée</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Decision Tree</td>
+                                    <td>68.9%</td>
+                                    <td>0.63</td>
+                                    <td>Faible</td>
+                                </tr>
+                                <tr>
+                                    <td>AdaBoost</td>
+                                    <td>51.3%</td>
+                                    <td>0.79</td>
+                                    <td>Moyenne</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5>🌉 Exemple: San Francisco</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Prédiction SVM:</strong> ~$441k</p>
+                                <ul>
+                                    <li>Revenu médian: $82,252</li>
+                                    <li>Âge moyen: 41 ans</li>
+                                    <li>Pièces moyennes: 7.0</li>
+                                    <li>Position: (37.88, -122.23)</li>
+                                </ul>
+                                <div class="badge bg-info">Zone à forte valeur</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h5>🌴 Exemple: Los Angeles</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Prédiction SVM:</strong> ~$205k</p>
+                                <ul>
+                                    <li>Revenu médian: $32,596</li>
+                                    <li>Âge moyen: 33 ans</li>
+                                    <li>Pièces moyennes: 3.3</li>
+                                    <li>Position: (34.03, -118.38)</li>
+                                </ul>
+                                <div class="badge bg-warning text-dark">Zone standard</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'algosAi:svm_housing_exemple_tester' %}" class="btn btn-primary btn-lg me-3">🧪 Tester le Modèle</a>
+                    <a href="{% url 'algosAi:svm_details' %}" class="btn btn-outline-secondary">← Retour aux détails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

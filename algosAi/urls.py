@@ -36,4 +36,26 @@ urlpatterns = [
     
     path('adaboost_housing_test/', views.adaboost_housing_exemple_tester, name='adaboost_housing_exemple_tester'),
     path('adaboost_housing_prediction_results/', views.adaboost_housing_prediction_results, name='adaboost_housing_prediction_results'),
+
+    # XGBoost routes
+    path('xgb_details/', views.xgb_details, name='xgb_details'),
+    path('xgb_iris/', views.xgb_iris, name='xgb_iris'),
+    path('xgb_regression/', views.xgb_regression, name='xgb_regression'),
+    
+    path('xgb_iris_test/', views.xgb_iris_exemple_tester, name='xgb_iris_exemple_tester'),
+    path('xgb_iris_prediction_results/', views.xgb_iris_prediction_results, name='xgb_iris_prediction_results'),
+    
+    path('xgb_housing_test/', views.xgb_housing_exemple_tester, name='xgb_housing_exemple_tester'),
+    path('xgb_housing_prediction_results/', views.xgb_housing_prediction_results, name='xgb_housing_prediction_results'),
+
+    # SVM routes
+    path('svm_details/', views.svm_details, name='svm_details'),
+    path('svm_iris/', views.svm_iris, name='svm_iris'),
+    path('svm_regression/', views.svm_regression, name='svm_regression'),
+    
+    path('svm_iris_test/', views.svm_iris_exemple_tester, name='svm_iris_exemple_tester'),
+    path('svm_iris_prediction_results/', views.svm_iris_prediction_results, name='svm_iris_prediction_results'),
+    
+    path('svm_housing_test/', views.svm_housing_exemple_tester, name='svm_housing_exemple_tester'),
+    path('svm_housing_prediction_results/', views.svm_housing_prediction_results, name='svm_housing_prediction_results'),
 ]

@@ -405,3 +405,283 @@ def load_models(name):
     ml_model = None
     ml_model = joblib.load(model_path)
     return ml_model
+
+
+# ===========================
+# XGBoost Views
+# ===========================
+
+def xgb_details(request):
+    """
+    Render the XGBoost details page.
+    """
+    return render(request, 'includes/xgb_details.html')
+
+def xgb_iris(request):
+    """
+    Render the XGBoost classification example page.
+    """
+    return render(request, 'includes/xgb_iris.html')
+
+def xgb_iris_exemple_tester(request):
+    """
+    Render the XGBoost iris example tester page using unified template.
+    """
+    context = {
+        'algorithm': 'XGBoost',
+        'algorithm_info': 'Gradient boosting optimisé avec 100 estimateurs pour une précision maximale.',
+        'action_url': reverse('algosAi:xgb_iris_prediction_results')
+    }
+    return render(request, 'includes/unified_iris_form.html', context)
+
+def xgb_iris_prediction_results(request):
+    if request.method == 'POST':
+        sepal_length = float(request.POST.get('sepal_length'))
+        sepal_width = float(request.POST.get('sepal_width'))
+        petal_length = float(request.POST.get('petal_length'))
+        petal_width = float(request.POST.get('petal_width'))
+
+        xgb_loaded = load_models('xgboost_iris_model.pkl')
+        prediction = xgb_loaded.predict([[sepal_length, sepal_width, petal_length, petal_width]])
+
+        predicted_class = prediction[0]
+
+        # Map the predicted class to the corresponding iris species
+        iris_species = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'}
+        img_url = {
+            'Setosa': 'images/setosa.jpeg',
+            'Versicolor': 'images/versicolor.JPG',
+            'Virginica': 'images/virginica.jpg'
+        }
+
+        predicted_species = iris_species[predicted_class]
+        predicted_img = img_url[predicted_species]
+
+        inputData = {
+            'sepal_length': sepal_length,
+            'sepal_width': sepal_width,
+            'petal_length': petal_length,
+            'petal_width': petal_width
+        }
+
+        data = {
+            'predicted_species': predicted_species,
+            'predicted_img': predicted_img,
+            'input_data': inputData,
+            'algorithm': 'XGBoost',
+            'form_url': reverse('algosAi:xgb_iris_exemple_tester'),
+            'details_url': reverse('algosAi:xgb_iris')
+        }
+
+        return render(request, 'includes/unified_iris_results.html', data)
+
+    return render(request, 'includes/unified_iris_form.html', {
+        'algorithm': 'XGBoost',
+        'algorithm_info': 'Gradient boosting optimisé avec 100 estimateurs pour une précision maximale.',
+        'action_url': reverse('algosAi:xgb_iris_prediction_results')
+    })
+
+def xgb_regression(request):
+    """
+    Render the XGBoost regression example page.
+    """
+    return render(request, 'includes/xgb_regression.html')
+
+def xgb_housing_exemple_tester(request):
+    """
+    Render the XGBoost California housing form page using unified template.
+    """
+    context = {
+        'algorithm': 'XGBoost',
+        'algorithm_info': 'Gradient Boosting optimisé - Meilleur R² score (83.1%) grâce au boosting avancé.',
+        'action_url': reverse('algosAi:xgb_housing_prediction_results')
+    }
+    return render(request, 'includes/unified_housing_form.html', context)
+
+def xgb_housing_prediction_results(request):
+    if request.method == 'POST':
+        MedInc = float(request.POST.get('MedInc'))
+        HouseAge = float(request.POST.get('HouseAge'))
+        AveRooms = float(request.POST.get('AveRooms'))
+        AveBedrms = float(request.POST.get('AveBedrms'))
+        Population = float(request.POST.get('Population'))
+        AveOccup = float(request.POST.get('AveOccup'))
+        Latitude = float(request.POST.get('Latitude'))
+        Longitude = float(request.POST.get('Longitude'))
+
+        xgb_loaded = load_models('xgboost_housing_model.pkl')
+        prediction = xgb_loaded.predict([[MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude]])
+
+        predicted_price = prediction[0] * 100  # Convert to thousands
+
+        inputData = {
+            'MedInc': MedInc,
+            'HouseAge': HouseAge,
+            'AveRooms': AveRooms,
+            'AveBedrms': AveBedrms,
+            'Population': Population,
+            'AveOccup': AveOccup,
+            'Latitude': Latitude,
+            'Longitude': Longitude
+        }
+
+        data = {
+            'predicted_price': f"${predicted_price:,.0f}",
+            'input_data': inputData,
+            'algorithm': 'XGBoost',
+            'form_url': reverse('algosAi:xgb_housing_exemple_tester'),
+            'details_url': reverse('algosAi:xgb_regression')
+        }
+
+        return render(request, 'includes/unified_housing_results.html', data)
+
+    return render(request, 'includes/unified_housing_form.html', {
+        'algorithm': 'XGBoost',
+        'algorithm_info': 'Gradient Boosting optimisé - Meilleur R² score (83.1%) grâce au boosting avancé.',
+        'action_url': reverse('algosAi:xgb_housing_prediction_results')
+    })
+
+
+# ===========================
+# SVM Views
+# ===========================
+
+def svm_details(request):
+    """
+    Render the SVM details page.
+    """
+    return render(request, 'includes/svm_details.html')
+
+def svm_iris(request):
+    """
+    Render the SVM classification example page.
+    """
+    return render(request, 'includes/svm_iris.html')
+
+def svm_iris_exemple_tester(request):
+    """
+    Render the SVM iris example tester page using unified template.
+    """
+    context = {
+        'algorithm': 'SVM',
+        'algorithm_info': 'Support Vector Machine avec kernel RBF - Classification avec marge maximale.',
+        'action_url': reverse('algosAi:svm_iris_prediction_results')
+    }
+    return render(request, 'includes/unified_iris_form.html', context)
+
+def svm_iris_prediction_results(request):
+    if request.method == 'POST':
+        sepal_length = float(request.POST.get('sepal_length'))
+        sepal_width = float(request.POST.get('sepal_width'))
+        petal_length = float(request.POST.get('petal_length'))
+        petal_width = float(request.POST.get('petal_width'))
+
+        # Load both model and scaler for SVM
+        svm_loaded = load_models('svm_iris_model.pkl')
+        scaler_loaded = load_models('svm_iris_scaler.pkl')
+        
+        # Scale the input data
+        input_data_scaled = scaler_loaded.transform([[sepal_length, sepal_width, petal_length, petal_width]])
+        prediction = svm_loaded.predict(input_data_scaled)
+
+        predicted_class = prediction[0]
+
+        # Map the predicted class to the corresponding iris species
+        iris_species = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'}
+        img_url = {
+            'Setosa': 'images/setosa.jpeg',
+            'Versicolor': 'images/versicolor.JPG',
+            'Virginica': 'images/virginica.jpg'
+        }
+
+        predicted_species = iris_species[predicted_class]
+        predicted_img = img_url[predicted_species]
+
+        inputData = {
+            'sepal_length': sepal_length,
+            'sepal_width': sepal_width,
+            'petal_length': petal_length,
+            'petal_width': petal_width
+        }
+
+        data = {
+            'predicted_species': predicted_species,
+            'predicted_img': predicted_img,
+            'input_data': inputData,
+            'algorithm': 'SVM',
+            'form_url': reverse('algosAi:svm_iris_exemple_tester'),
+            'details_url': reverse('algosAi:svm_iris')
+        }
+
+        return render(request, 'includes/unified_iris_results.html', data)
+
+    return render(request, 'includes/unified_iris_form.html', {
+        'algorithm': 'SVM',
+        'algorithm_info': 'Support Vector Machine avec kernel RBF - Classification avec marge maximale.',
+        'action_url': reverse('algosAi:svm_iris_prediction_results')
+    })
+
+def svm_regression(request):
+    """
+    Render the SVM regression example page.
+    """
+    return render(request, 'includes/svm_regression.html')
+
+def svm_housing_exemple_tester(request):
+    """
+    Render the SVM California housing form page using unified template.
+    """
+    context = {
+        'algorithm': 'SVM',
+        'algorithm_info': 'Support Vector Regression avec kernel RBF - Optimise la marge pour la régression.',
+        'action_url': reverse('algosAi:svm_housing_prediction_results')
+    }
+    return render(request, 'includes/unified_housing_form.html', context)
+
+def svm_housing_prediction_results(request):
+    if request.method == 'POST':
+        MedInc = float(request.POST.get('MedInc'))
+        HouseAge = float(request.POST.get('HouseAge'))
+        AveRooms = float(request.POST.get('AveRooms'))
+        AveBedrms = float(request.POST.get('AveBedrms'))
+        Population = float(request.POST.get('Population'))
+        AveOccup = float(request.POST.get('AveOccup'))
+        Latitude = float(request.POST.get('Latitude'))
+        Longitude = float(request.POST.get('Longitude'))
+
+        # Load both model and scaler for SVM
+        svm_loaded = load_models('svm_housing_model.pkl')
+        scaler_loaded = load_models('svm_housing_scaler.pkl')
+        
+        # Scale the input data
+        input_data_scaled = scaler_loaded.transform([[MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude]])
+        prediction = svm_loaded.predict(input_data_scaled)
+
+        predicted_price = prediction[0] * 100  # Convert to thousands
+
+        inputData = {
+            'MedInc': MedInc,
+            'HouseAge': HouseAge,
+            'AveRooms': AveRooms,
+            'AveBedrms': AveBedrms,
+            'Population': Population,
+            'AveOccup': AveOccup,
+            'Latitude': Latitude,
+            'Longitude': Longitude
+        }
+
+        data = {
+            'predicted_price': f"${predicted_price:,.0f}",
+            'input_data': inputData,
+            'algorithm': 'SVM',
+            'form_url': reverse('algosAi:svm_housing_exemple_tester'),
+            'details_url': reverse('algosAi:svm_regression')
+        }
+
+        return render(request, 'includes/unified_housing_results.html', data)
+
+    return render(request, 'includes/unified_housing_form.html', {
+        'algorithm': 'SVM',
+        'algorithm_info': 'Support Vector Regression avec kernel RBF - Optimise la marge pour la régression.',
+        'action_url': reverse('algosAi:svm_housing_prediction_results')
+    })
