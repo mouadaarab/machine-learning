@@ -4,13 +4,11 @@ Ce dossier contient les scripts pour créer et entraîner les modèles de Machin
 
 ## 📁 Fichiers
 
-### 🌸 Classification Iris
-- **`create_iris_model.py`** : Crée le modèle Random Forest pour classifier les espèces d'iris
-- **Performance** : ~97% de précision sur le test set
-
-### 🏠 Régression California Housing  
-- **`create_california_housing_model.py`** : Crée le modèle Random Forest pour prédire les prix immobiliers
-- **Performance** : R² = 0.775 sur le test set
+### � Random Forest (Les Deux)
+- **`create_random_forest_models.py`** : Crée les modèles Random Forest pour classification et régression
+- **Performances** :
+  - Iris : 90% de précision (très bon avec ensemble d'arbres)
+  - California Housing : R² = 0.775 sur le test set
 
 ### 🌳 Decision Tree (Les Deux)
 - **`create_decision_tree_models.py`** : Crée les modèles Decision Tree pour classification et régression
@@ -35,8 +33,7 @@ Ce dossier contient les scripts pour créer et entraîner les modèles de Machin
 cd aiPlateform
 
 # Modèles Random Forest
-python scripts/create_iris_model.py
-python scripts/create_california_housing_model.py
+python scripts/create_random_forest_models.py
 
 # Modèles Decision Tree
 python scripts/create_decision_tree_models.py
