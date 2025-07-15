@@ -1,0 +1,342 @@
+{% include "includes/header.html" %}
+<div class="container">
+    <!-- Navigation de retour -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:svm_details' %}">SVM</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Classification Iris</li>
+        </ol>
+    </nav>
+
+    <!-- Titre -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1 class="h3 mb-0">🎯 SVM - Classification des Espèces d'Iris</h1>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Classification des espèces de fleurs d'iris avec Support Vector Machine et kernel RBF</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:svm_details' %}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                                📖 Théorie SVM
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="btn btn-success btn-sm w-100 mb-2">
+                                🌸 Classification Iris (Actuel)
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:svm_regression' %}" class="btn btn-outline-info btn-sm w-100 mb-2">
+                                🏠 Régression Housing
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                                ↩️ Retour Accueil
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12 text-center">
+                            <a href="{% url 'algosAi:svm_iris_exemple_tester' %}" class="btn btn-warning btn-sm">
+                                🧪 Tester le Modèle SVM Classification
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="alert alert-info" role="alert">
+        <h5>🎯 Objectif</h5>
+        <p>Utiliser Support Vector Machine avec <strong>kernel RBF</strong> pour classifier les espèces de fleurs d'iris. Le modèle atteint une <strong>précision de 96.7%</strong> en trouvant les hyperplans optimaux qui séparent les classes.</p>
+    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <strong>🔧 Normalisation :</strong> Les données sont normalisées avec StandardScaler 
+                            pour optimiser les performances de SVM.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5>🌺 Setosa</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                {% load static %}
+                                <img src="{% static 'images/setosa.jpeg' %}" alt="Setosa" class="img-fluid mb-3" style="max-height: 200px;">
+                                <p><strong>Facilement séparable</strong></p>
+                                <p>SVM trouve facilement la frontière pour séparer Setosa des autres espèces.</p>
+                                <div class="badge bg-success">10 vecteurs de support</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h5>🌻 Versicolor</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                {% load static %}
+                                <img src="{% static 'images/versicolor.JPG' %}" alt="Versicolor" class="img-fluid mb-3" style="max-height: 200px;">
+                                <p><strong>Complexité moyenne</strong></p>
+                                <p>Quelques chevauchements avec Virginica nécessitent plus de vecteurs de support.</p>
+                                <div class="badge bg-warning text-dark">18 vecteurs de support    <!-- Dataset Iris -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🌸 Dataset Iris</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>📊 Informations générales</h5>
+                            <ul>
+                                <li><strong>Échantillons :</strong> 150 fleurs d'iris</li>
+                                <li><strong>Classes :</strong> 3 espèces (50 par classe)</li>
+                                <li><strong>Caractéristiques :</strong> 4 mesures par fleur</li>
+                                <li><strong>Type :</strong> Classification multi-classes</li>
+                                <li><strong>Équilibrage :</strong> Dataset parfaitement équilibré</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>🔍 Caractéristiques mesurées</h5>
+                            <ul>
+                                <li><strong>Longueur des sépales</strong> (en cm)</li>
+                                <li><strong>Largeur des sépales</strong> (en cm)</li>
+                                <li><strong>Longueur des pétales</strong> (en cm)</li>
+                                <li><strong>Largeur des pétales</strong> (en cm)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance du modèle -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>📊 Performance du Modèle SVM</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h5>🎯 Accuracy</h5>
+                                <h2 class="text-success">96.7%</h2>
+                                <small class="text-muted">Sur le test set</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h5>✅ Validation croisée</h5>
+                                <h2 class="text-primary">96.7%</h2>
+                                <small class="text-muted">±4.2% (robuste)</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h5>🔍 Vecteurs de support</h5>
+                                <h2 class="text-warning">47</h2>
+                                <small class="text-muted">Sur 120 échantillons</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h5>⚙️ Kernel</h5>
+                                <h2 class="text-info">RBF</h2>
+                                <small class="text-muted">Radial Basis Function</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration SVM -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>⚙️ Configuration du Modèle SVM</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>🔧 Paramètres</h5>
+                            <ul>
+                                <li><strong>Algorithme :</strong> Support Vector Machine</li>
+                                <li><strong>Kernel :</strong> RBF (Radial Basis Function)</li>
+                                <li><strong>Paramètre C :</strong> 1.0 (régularisation)</li>
+                                <li><strong>Gamma :</strong> 'scale' (auto-ajusté)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>� Fonctionnement</h5>
+                            <ol>
+                                <li><strong>Normalisation :</strong> Features mises à la même échelle</li>
+                                <li><strong>Projection :</strong> Kernel RBF projette dans un espace supérieur</li>
+                                <li><strong>Séparation :</strong> Hyperplans optimaux trouvés</li>
+                                <li><strong>Prédiction :</strong> Basée sur 47 vecteurs de support seulement</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vecteurs de support par espèce -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>🔍 Analyse des Vecteurs de Support</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-header bg-success text-white">
+                                    <h5>🌿 Setosa</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    {% load static %}
+                                    <img src="{% static 'images/setosa.jpeg' %}" alt="Setosa" class="img-fluid mb-3" style="max-height: 200px; object-fit: cover;">
+                                    <p><strong>Facilement séparable</strong></p>
+                                    <p>Espèce bien distincte des autres, nécessite moins de vecteurs de support.</p>
+                                    <div class="badge bg-success">10 vecteurs de support</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5>🌺 Versicolor</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    {% load static %}
+                                    <img src="{% static 'images/versicolor.JPG' %}" alt="Versicolor" class="img-fluid mb-3" style="max-height: 200px; object-fit: cover;">
+                                    <p><strong>Complexité moyenne</strong></p>
+                                    <p>Quelques chevauchements avec Virginica nécessitent plus de vecteurs de support.</p>
+                                    <div class="badge bg-warning text-dark">18 vecteurs de support</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5>�🌷 Virginica</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    {% load static %}
+                                    <img src="{% static 'images/virginica.jpg' %}" alt="Virginica" class="img-fluid mb-3" style="max-height: 200px; object-fit: cover;">
+                                    <p><strong>Plus complexe</strong></p>
+                                    <p>Frontière complexe avec Versicolor nécessite le plus de vecteurs de support.</p>
+                                    <div class="badge bg-primary">19 vecteurs de support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <strong>💡 Insight :</strong> Setosa est linéairement séparable des autres espèces, tandis que Versicolor et Virginica nécessitent plus de vecteurs de support pour gérer leurs frontières complexes.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Métriques de classification -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>📏 Comprendre les métriques de classification</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>🎯 Accuracy (Précision)</h5>
+                            <p>Proportion de prédictions correctes sur l'ensemble des prédictions.</p>
+                            <ul>
+                                <li><strong>Formule :</strong> (VP + VN) / Total</li>
+                                <li><strong>Bon pour :</strong> Datasets équilibrés</li>
+                                <li><strong>Iris :</strong> 96.7% très performant</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>📊 Validation croisée</h5>
+                            <p>Évalue la robustesse du modèle sur différents sous-ensembles des données.</p>
+                            <ul>
+                                <li><strong>Méthode :</strong> 5-fold cross-validation</li>
+                                <li><strong>Avantage :</strong> Réduit le surapprentissage</li>
+                                <li><strong>Résultat :</strong> 96.7% ±4.2% stable</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>🔍 Vecteurs de support</h5>
+                            <p>Points de données critiques qui définissent les frontières de décision.</p>
+                            <ul>
+                                <li><strong>Efficacité :</strong> 47 points définissent tout</li>
+                                <li><strong>Robustesse :</strong> Résistant au bruit</li>
+                                <li><strong>Avantage :</strong> Modèle compact</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧪 Tester le modèle</h4>
+                </div>
+                <div class="card-body text-center">
+                    <p>Prêt à voir SVM en action ? Testez le modèle avec vos propres mesures d'iris !</p>
+                    <a href="{% url 'algosAi:svm_iris_exemple_tester' %}" class="btn btn-primary btn-lg">
+                        🌸 Tester le Modèle SVM
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}

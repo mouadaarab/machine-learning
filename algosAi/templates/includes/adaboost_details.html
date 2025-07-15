@@ -1,7 +1,46 @@
 {% include "includes/header.html" %}
-<div class="container">
-    <h2 class="mb-4">AdaBoost (Adaptive Boosting)</h2>
-    
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AdaBoost</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">🚀 AdaBoost (Adaptive Boosting)</h1>
+        </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:adaboost_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:adaboost_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description principale -->
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-info">

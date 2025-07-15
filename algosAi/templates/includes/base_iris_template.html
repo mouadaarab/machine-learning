@@ -1,3 +1,16 @@
+{% comment %}
+Template de base uniforme pour les pages d'exemples Iris
+Variables requises:
+- algo_name: Nom de l'algorithme (ex: "Random Forest")
+- algo_icon: Icône de l'algorithme (ex: "🌲")
+- accuracy: Précision du modèle (ex: "96.7%")
+- feature_importance: Liste des importances des caractéristiques (optionnel)
+- performance_details: Détails supplémentaires sur les performances (optionnel)
+- test_url: URL pour tester le modèle
+- details_url: URL pour les détails de l'algorithme
+- housing_url: URL pour l'exemple de régression housing (optionnel)
+{% endcomment %}
+
 {% include "includes/header.html" %}
 
 <div class="container mt-4">
@@ -5,7 +18,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'algosAi:rf_details' %}">Random Forest</a></li>
+            <li class="breadcrumb-item"><a href="{{ details_url }}">{{ algo_name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">Classification Iris</li>
         </ol>
     </nav>
@@ -13,7 +26,7 @@
     <!-- Titre principal -->
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center mb-4">🌲 Random Forest pour la Classification Iris</h1>
+            <h1 class="text-center mb-4">{{ algo_icon }} {{ algo_name }} pour la Classification Iris</h1>
         </div>
     </div>
 
@@ -27,13 +40,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                            <a href="{{ details_url }}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
                         </div>
+                        {% if housing_url %}
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                            <a href="{{ housing_url }}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
                         </div>
+                        {% endif %}
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                            <a href="{{ test_url }}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
                         </div>
                         <div class="col-md-3 mb-2">
                             <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
@@ -82,7 +97,7 @@
                     <ol>
                         <li><strong>Chargement :</strong> Import du dataset Iris depuis sklearn</li>
                         <li><strong>Préparation :</strong> Division train/test (80%/20%)</li>
-                        <li><strong>Entraînement :</strong> RandomForestClassifier avec 100 arbres</li>
+                        <li><strong>Entraînement :</strong> Configuration et entraînement du modèle {{ algo_name }}</li>
                         <li><strong>Évaluation :</strong> Calcul des métriques de performance</li>
                         <li><strong>Sauvegarde :</strong> Sérialisation du modèle entraîné avec Joblib</li>
                         <li><strong>Validation :</strong> Tests de prédiction et vérification</li>
@@ -97,72 +112,38 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <h4>📊 Performance du Modèle Random Forest</h4>
+                    <h4>📊 Performance du Modèle</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="text-center">
                                 <h5>Précision Globale</h5>
-                                <h2 class="text-success">100%</h2>
+                                <h2 class="text-success">{{ accuracy }}</h2>
                                 <p class="text-muted">Sur le jeu de test</p>
                             </div>
                         </div>
+                        {% if feature_importance %}
                         <div class="col-md-8">
                             <h5>Importance des Caractéristiques</h5>
-                            <div class="progress-group">
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Petal Width:</strong> Impact très élevé</span>
-                                        <span>~45%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Petal Length:</strong> Impact élevé</span>
-                                        <span>~42%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 42%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Sepal Length:</strong> Impact modéré</span>
-                                        <span>~8%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 8%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Sepal Width:</strong> Impact faible</span>
-                                        <span>~5%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 5%"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul>
+                                {% for feature in feature_importance %}
+                                <li><strong>{{ feature.name }}:</strong> {{ feature.importance }} ({{ feature.description }})</li>
+                                {% endfor %}
+                            </ul>
                         </div>
+                        {% endif %}
                     </div>
                     
+                    {% if performance_details %}
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <h5>Détails de performance</h5>
-                            <ul>
-                                <li><strong>Modèle :</strong> RandomForestClassifier avec 100 arbres</li>
-                                <li><strong>Précision par classe :</strong> 100% pour chaque espèce d'iris</li>
-                                <li><strong>Stabilité :</strong> Très haute grâce à l'ensemble d'arbres</li>
-                                <li><strong>Robustesse :</strong> Résistant au surapprentissage</li>
-                            </ul>
+                            {{ performance_details|safe }}
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -199,9 +180,9 @@
     <!-- Call to action -->
     <div class="alert alert-info" role="alert">
         <h4>🚀 Prêt à tester ?</h4>
-        <p><strong>Le modèle Random Forest entraîné est sauvegardé et prêt à être utilisé !</strong></p>
+        <p><strong>Le modèle {{ algo_name }} entraîné est sauvegardé et prêt à être utilisé !</strong></p>
         <p>Cliquez sur le bouton ci-dessous pour tester le modèle avec vos propres valeurs de caractéristiques.</p>
-        <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-success btn-lg">🧪 Tester le Modèle Random Forest</a>
+        <a href="{{ test_url }}" class="btn btn-success btn-lg">🧪 Tester le Modèle {{ algo_name }}</a>
     </div>
 </div>
 

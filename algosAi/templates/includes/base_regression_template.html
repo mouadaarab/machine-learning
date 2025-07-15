@@ -1,3 +1,15 @@
+{% comment %}
+Template de base uniforme pour les pages d'exemples California Housing
+Variables requises:
+- algo_name: Nom de l'algorithme (ex: "Random Forest")
+- algo_icon: Icône de l'algorithme (ex: "🌲")
+- r2_score: Score R² du modèle (ex: "0.82")
+- performance_details: Détails supplémentaires sur les performances (optionnel)
+- test_url: URL pour tester le modèle
+- details_url: URL pour les détails de l'algorithme
+- iris_url: URL pour l'exemple de classification iris (optionnel)
+{% endcomment %}
+
 {% include "includes/header.html" %}
 
 <div class="container mt-4">
@@ -5,7 +17,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'algosAi:rf_details' %}">Random Forest</a></li>
+            <li class="breadcrumb-item"><a href="{{ details_url }}">{{ algo_name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">Régression Housing</li>
         </ol>
     </nav>
@@ -13,7 +25,7 @@
     <!-- Titre principal -->
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center mb-4">🌲 Random Forest pour la Régression California Housing</h1>
+            <h1 class="text-center mb-4">{{ algo_icon }} {{ algo_name }} pour la Régression California Housing</h1>
         </div>
     </div>
 
@@ -27,13 +39,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                            <a href="{{ details_url }}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
                         </div>
+                        {% if iris_url %}
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                            <a href="{{ iris_url }}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
                         </div>
+                        {% endif %}
                         <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_housing_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                            <a href="{{ test_url }}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
                         </div>
                         <div class="col-md-3 mb-2">
                             <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
@@ -83,7 +97,7 @@
                         <li><strong>Chargement :</strong> Import du dataset California Housing depuis sklearn</li>
                         <li><strong>Exploration :</strong> Analyse des données et des corrélations</li>
                         <li><strong>Préparation :</strong> Division train/test (80%/20%)</li>
-                        <li><strong>Entraînement :</strong> RandomForestRegressor avec 100 estimateurs</li>
+                        <li><strong>Entraînement :</strong> Configuration et entraînement du modèle {{ algo_name }}</li>
                         <li><strong>Évaluation :</strong> Calcul des métriques de régression (R², MAE, MSE)</li>
                         <li><strong>Sauvegarde :</strong> Sérialisation du modèle entraîné avec Joblib</li>
                         <li><strong>Validation :</strong> Tests de prédiction sur de nouveaux échantillons</li>
@@ -98,14 +112,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-success text-white">
-                    <h4>📊 Performance du Modèle Random Forest</h4>
+                    <h4>📊 Performance du Modèle {{ algo_name }}</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="text-center">
                                 <h5>Score R²</h5>
-                                <h2 class="text-success">0.82</h2>
+                                <h2 class="text-success">{{ r2_score }}</h2>
                                 <p class="text-muted">Coefficient de détermination</p>
                             </div>
                         </div>
@@ -118,27 +132,27 @@
                                     Plus proche de 1, meilleur est le modèle.</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <h6>📏 Erreur RMSE</h6>
-                                    <p><strong>~$54,310</strong> d'erreur moyenne de prédiction. 
-                                    Le modèle explique environ <strong>82%</strong> de la variance des prix.</p>
+                                    <h6>📏 Interprétation</h6>
+                                    <ul>
+                                        <li><strong>0.8-1.0 :</strong> Excellent</li>
+                                        <li><strong>0.6-0.8 :</strong> Bon</li>
+                                        <li><strong>0.4-0.6 :</strong> Modéré</li>
+                                        <li><strong>&lt;0.4 :</strong> Faible</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
+                    {% if performance_details %}
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Spécificités de Random Forest pour la régression</h5>
-                            <ul>
-                                <li><strong>Ensemble d'arbres :</strong> 100 arbres de décision indépendants</li>
-                                <li><strong>Prédiction :</strong> Moyenne des prédictions de tous les arbres</li>
-                                <li><strong>Robustesse :</strong> Résistant au surapprentissage grâce à l'ensemble</li>
-                                <li><strong>Non-linéarité :</strong> Capture les relations complexes entre variables</li>
-                                <li><strong>Importance des variables :</strong> Calcul automatique de l'importance des caractéristiques</li>
-                            </ul>
+                            <h5>Détails de performance</h5>
+                            {{ performance_details|safe }}
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -186,9 +200,9 @@
     <!-- Call to action -->
     <div class="alert alert-info" role="alert">
         <h4>🚀 Prêt à tester ?</h4>
-        <p><strong>Le modèle Random Forest entraîné est sauvegardé et prêt à être utilisé !</strong></p>
+        <p><strong>Le modèle {{ algo_name }} entraîné est sauvegardé et prêt à être utilisé !</strong></p>
         <p>Testez le modèle en saisissant les caractéristiques d'un district pour prédire le prix médian des logements.</p>
-        <a href="{% url 'algosAi:rf_housing_exemple_tester' %}" class="btn btn-success btn-lg">🧪 Tester le Modèle Random Forest</a>
+        <a href="{{ test_url }}" class="btn btn-success btn-lg">🧪 Tester le Modèle {{ algo_name }}</a>
     </div>
 </div>
 

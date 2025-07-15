@@ -1,89 +1,246 @@
 {% include "includes/header.html" %}
-{% load static %}
-<div class="container">
-    <h2 class="mb-4">Algorithme Decision Tree (Arbre de Décision)</h2>
-    
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Decision Tree</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">🌳 Decision Tree (Arbre de Décision)</h1>
+        </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h4>Qu'est-ce qu'un Decision Tree ?</h4>
+                    <h4>🧭 Navigation</h4>
                 </div>
                 <div class="card-body">
-                    <p>Un <strong>Decision Tree</strong> (Arbre de Décision) est un algorithme d'apprentissage supervisé qui peut être utilisé pour les tâches de classification et de régression.</p>
-                    <p>Il modélise les décisions sous forme d'arbre où chaque nœud interne représente un test sur un attribut, chaque branche représente le résultat du test, et chaque feuille représente une étiquette de classe.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-success text-white">
-                    <h4>Avantages</h4>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><strong>Interprétabilité :</strong> Facile à comprendre et à interpréter</li>
-                        <li><strong>Pas de préparation :</strong> Peu de préparation des données nécessaire</li>
-                        <li><strong>Flexibilité :</strong> Peut gérer des données numériques et catégorielles</li>
-                        <li><strong>Rapide :</strong> Prédictions rapides</li>
-                        <li><strong>Sélection automatique :</strong> Sélection automatique des caractéristiques importantes</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:dt_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:dt_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-warning text-dark">
-                    <h4>Inconvénients</h4>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><strong>Surapprentissage :</strong> Tendance au surapprentissage</li>
-                        <li><strong>Instabilité :</strong> Petits changements dans les données peuvent créer un arbre très différent</li>
-                        <li><strong>Biais :</strong> Bias vers les caractéristiques avec plus de niveaux</li>
-                        <li><strong>Difficulté :</strong> Difficile à optimiser globalement</li>
-                    </ul>
-                </div>
+    <!-- Description principale -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4>🚀 Qu'est-ce qu'un Decision Tree ?</h4>
+                <p><strong>Decision Tree (Arbre de Décision)</strong> est un algorithme d'apprentissage supervisé qui modélise les décisions sous forme d'arbre. Chaque nœud interne représente un test sur un attribut, chaque branche le résultat du test, et chaque feuille une classe ou valeur prédite.</p>
             </div>
         </div>
-        
-        <div class="col-md-6">
+    </div>
+
+    <!-- Principe de fonctionnement -->
+    <div class="row mb-4">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-info text-white">
-                    <h4>Paramètres Importants</h4>
+                    <h4>🎯 Principe de fonctionnement</h4>
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li><strong>max_depth :</strong> Profondeur maximale de l'arbre</li>
-                        <li><strong>min_samples_split :</strong> Nombre minimum d'échantillons pour diviser un nœud</li>
-                        <li><strong>min_samples_leaf :</strong> Nombre minimum d'échantillons dans une feuille</li>
-                        <li><strong>criterion :</strong> Fonction pour mesurer la qualité d'une division</li>
+                        <li><strong>Division récursive :</strong> Divise l'espace des caractéristiques de manière récursive</li>
+                        <li><strong>Critères de division :</strong> Utilise des critères comme Gini, entropie ou variance</li>
+                        <li><strong>Sélection d'attributs :</strong> Choisit l'attribut qui maximise le gain d'information</li>
+                        <li><strong>Condition d'arrêt :</strong> S'arrête selon des critères de profondeur ou pureté</li>
+                        <li><strong>Prédiction :</strong> Suit le chemin de l'arbre jusqu'à une feuille</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-4">
+    <!-- Hyperparamètres -->
+    <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
-                    <h4>Comment ça fonctionne ?</h4>
+                    <h4>⚙️ Hyperparamètres clés</h4>
                 </div>
                 <div class="card-body">
-                    <ol>
-                        <li><strong>Sélection de l'attribut :</strong> Choisir le meilleur attribut pour diviser les données</li>
-                        <li><strong>Division :</strong> Diviser l'ensemble de données selon l'attribut sélectionné</li>
-                        <li><strong>Récursion :</strong> Répéter le processus pour chaque sous-ensemble</li>
-                        <li><strong>Arrêt :</strong> S'arrêter selon des critères prédéfinis (profondeur, nombre d'échantillons, etc.)</li>
-                        <li><strong>Prédiction :</strong> Suivre le chemin dans l'arbre pour faire une prédiction</li>
-                    </ol>
+                    <ul>
+                        <li><strong>criterion :</strong> Critère de division (gini, entropy, squared_error)</li>
+                        <li><strong>max_depth :</strong> Profondeur maximale de l'arbre</li>
+                        <li><strong>min_samples_split :</strong> Nombre minimum d'échantillons pour diviser un nœud</li>
+                        <li><strong>min_samples_leaf :</strong> Nombre minimum d'échantillons dans une feuille</li>
+                        <li><strong>max_features :</strong> Nombre de caractéristiques à considérer pour la division</li>
+                        <li><strong>random_state :</strong> Graine pour la reproductibilité</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </div>
+            </div>
+    <!-- Avantages et Inconvénients -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Interprétabilité :</strong> Facile à comprendre et visualiser</li>
+                        <li><strong>Simplicité :</strong> Peu de préparation des données nécessaire</li>
+                        <li><strong>Flexibilité :</strong> Gère données numériques et catégorielles</li>
+                        <li><strong>Rapidité :</strong> Prédictions très rapides</li>
+                        <li><strong>Sélection automatique :</strong> Identifie les variables importantes</li>
+                        <li><strong>Non-linéarité :</strong> Capture des relations non-linéaires</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5>⚠️ Inconvénients</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Surapprentissage :</strong> Tendance au surapprentissage sur données complexes</li>
+                        <li><strong>Instabilité :</strong> Sensible aux petits changements de données</li>
+                        <li><strong>Biais :</strong> Favorise les variables avec plus de modalités</li>
+                        <li><strong>Optimisation :</strong> Difficile à optimiser globalement</li>
+                        <li><strong>Linéarité :</strong> Frontières de décision rectangulaires uniquement</li>
+                        <li><strong>Variance :</strong> Haute variance, faible biais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>💼 Applications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Classification</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Régression</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Règles métier</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Analyse exploratoire</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Diagnostic médical</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Finance (scoring)</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Marketing</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Base pour ensembles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Critères de division -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>📏 Critères de division</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>🎯 Classification</h5>
+                            <ul>
+                                <li><strong>Gini :</strong> Mesure d'impureté (défaut)</li>
+                                <li><strong>Entropy :</strong> Mesure de désordre</li>
+                                <li><strong>Log loss :</strong> Perte logarithmique</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>📊 Régression</h5>
+                            <ul>
+                                <li><strong>Squared error :</strong> Erreur quadratique (défaut)</li>
+                                <li><strong>Absolute error :</strong> Erreur absolue</li>
+                                <li><strong>Poisson :</strong> Pour données de comptage</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>🛑 Arrêt</h5>
+                            <ul>
+                                <li><strong>max_depth :</strong> Profondeur limite</li>
+                                <li><strong>min_samples :</strong> Échantillons minimum</li>
+                                <li><strong>min_impurity :</strong> Seuil d'impureté</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance comparative -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>📊 Performance dans notre plateforme</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>🌸 Classification Iris</h5>
+                            <ul>
+                                <li><strong>Précision :</strong> 100% (Parfait)</li>
+                                <li><strong>Règles simples :</strong> Seulement 2 caractéristiques utilisées</li>
+                                <li><strong>Interprétabilité :</strong> Règles facilement compréhensibles</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>🏠 Régression California Housing</h5>
+                            <ul>
+                                <li><strong>R² Score :</strong> ~0.67 (Performance correcte)</li>
+                                <li><strong>Simplicité :</strong> Modèle de base sans ensemble</li>
+                                <li><strong>Rapidité :</strong> Prédictions instantanées</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
         </div>
     </div>
 

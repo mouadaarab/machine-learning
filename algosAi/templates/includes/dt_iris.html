@@ -1,44 +1,42 @@
 {% include "includes/header.html" %}
-<div class="container">
-    <h2 class="mb-4">Decision Tree pour la prédiction de type des fleurs - IRIS</h2>
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:dt_details' %}">Decision Tree</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Classification Iris</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
     <div class="row">
-        <div class="col-md-6">
-            <h3>Détails</h3>
-            <p>IRIS est un jeu de données bien connu en ML, qui contient des mesures de différentes caractéristiques de fleurs d'iris.</p>
-            <p>Le modèle Decision Tree atteint une <strong>précision de 100%</strong> sur ce dataset, ce qui démontre sa capacité à créer des règles de décision parfaites pour ce problème.</p>
-        </div>
-        <div class="col-md-6">
-            <h3>Les étapes d'implémentation:</h3>
-            <ul>
-                <li>Chargement du jeu de données IRIS</li>
-                <li>Prétraitement des données</li>
-                <li>Entraînement du modèle Decision Tree</li>
-                <li>Évaluation du modèle</li>
-                <li>Enregistrement du modèle entraîné</li>
-            </ul>
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">🌳 Decision Tree pour la Classification Iris</h1>
         </div>
     </div>
 
-    <div class="row mt-4">
+    <!-- Navigation interne -->
+    <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-success text-white">
-                    <h4>Performance du Modèle</h4>
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <h5>Précision Globale</h5>
-                            <h2 class="text-success">100%</h2>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:dt_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
                         </div>
-                        <div class="col-md-8">
-                            <h5>Importance des Caractéristiques</h5>
-                            <ul>
-                                <li><strong>Petal Length:</strong> 93.2% (Très importante)</li>
-                                <li><strong>Petal Width:</strong> 6.8% (Importante)</li>
-                                <li><strong>Sepal Length:</strong> 0% (Non utilisée)</li>
-                                <li><strong>Sepal Width:</strong> 0% (Non utilisée)</li>
-                            </ul>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:dt_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:dt_iris_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
                         </div>
                     </div>
                 </div>
@@ -46,28 +44,165 @@
         </div>
     </div>
 
-    <div class="alert alert-info" role="info">
-        <strong>Info:</strong> Le modèle entraîné sauvegardé dans cet atelier est celui utilisé dans le test (<em>Tester le modèle</em>). 
-        L'arbre de décision a automatiquement identifié que seules les dimensions des pétales sont nécessaires pour classifier parfaitement les espèces d'iris.
-    </div>
+    <!-- À propos du dataset Iris -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h4>🌸 Dataset Iris</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>IRIS</strong> est un jeu de données classique en machine learning, introduit par Ronald Fisher en 1936. 
+                    Il contient des mesures de différentes caractéristiques de fleurs d'iris de trois espèces différentes.</p>
+                    
+                    <h5>Caractéristiques :</h5>
+                    <ul>
+                        <li><strong>Sepal Length :</strong> Longueur du sépale</li>
+                        <li><strong>Sepal Width :</strong> Largeur du sépale</li>
+                        <li><strong>Petal Length :</strong> Longueur du pétale</li>
+                        <li><strong>Petal Width :</strong> Largeur du pétale</li>
+                    </ul>
 
-    <div class="alert alert-success" role="alert">
-        <strong>Avantage du Decision Tree:</strong> Contrairement au Random Forest, vous pouvez facilement interpréter les règles de décision utilisées par le modèle !
-    </div>
+                    <h5>Classes :</h5>
+                    <ul>
+                        <li>🌸 <strong>Setosa</strong></li>
+                        <li>🌺 <strong>Versicolor</strong></li>
+                        <li>🌹 <strong>Virginica</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div>
-        <a href="{% url 'algosAi:dt_iris_exemple_tester' %}" class="btn btn-primary col-12">Tester le Modèle Decision Tree</a>
-    </div>
-
-    <div class="mt-4">
-        <h3>Règles de Décision Simplifiées</h3>
-        <div class="alert alert-light border">
-            <code>
-                Si Petal Length ≤ 2.45 cm → <strong>Setosa</strong><br>
-                Sinon si Petal Width ≤ 1.65 cm → <strong>Versicolor</strong><br>
-                Sinon → <strong>Virginica</strong>
-            </code>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h4>🔄 Étapes d'implémentation</h4>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li><strong>Chargement :</strong> Import du dataset Iris depuis sklearn</li>
+                        <li><strong>Préparation :</strong> Division train/test (80%/20%)</li>
+                        <li><strong>Entraînement :</strong> DecisionTreeClassifier avec critère gini</li>
+                        <li><strong>Évaluation :</strong> Calcul des métriques de performance</li>
+                        <li><strong>Sauvegarde :</strong> Sérialisation du modèle entraîné avec Joblib</li>
+                        <li><strong>Validation :</strong> Tests de prédiction et vérification</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Performance du modèle -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>📊 Performance du Modèle Decision Tree</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h5>Précision Globale</h5>
+                                <h2 class="text-success">100%</h2>
+                                <p class="text-muted">Sur le jeu de test</p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Importance des Caractéristiques</h5>
+                            <div class="progress-group">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>Petal Length:</strong> Très importante</span>
+                                        <span>93.2%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 93%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>Petal Width:</strong> Importante</span>
+                                        <span>6.8%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 7%"></div>
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                                    <small><strong>Note :</strong> Sepal Length et Sepal Width ne sont pas utilisées (0%)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Règles de décision -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4>🌳 Règles de Décision du Modèle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-light border">
+                        <h5>📋 Règles Simplifiées :</h5>
+                        <div class="font-monospace">
+                            <strong>Si</strong> Petal Length ≤ 2.45 cm <strong>→ 🌸 Setosa</strong><br>
+                            <strong>Sinon si</strong> Petal Width ≤ 1.65 cm <strong>→ 🌺 Versicolor</strong><br>
+                            <strong>Sinon → 🌹 Virginica</strong>
+                        </div>
+                    </div>
+                    <div class="alert alert-success">
+                        <strong>🎯 Avantage du Decision Tree :</strong> Contrairement aux autres modèles d'ensemble, 
+                        vous pouvez facilement interpréter et comprendre les règles de décision utilisées !
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Images des espèces d'iris -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>🖼️ Les trois espèces d'Iris</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            {% load static %}
+                            <img src="{% static 'images/setosa.jpeg' %}" class="img-fluid rounded mb-2" alt="Iris Setosa" style="max-height: 200px;">
+                            <h5>🌸 Iris Setosa</h5>
+                            <small class="text-muted">Petal Length ≤ 2.45 cm</small>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <img src="{% static 'images/versicolor.JPG' %}" class="img-fluid rounded mb-2" alt="Iris Versicolor" style="max-height: 200px;">
+                            <h5>🌺 Iris Versicolor</h5>
+                            <small class="text-muted">Petal Length > 2.45 cm et Petal Width ≤ 1.65 cm</small>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <img src="{% static 'images/virginica.jpg' %}" class="img-fluid rounded mb-2" alt="Iris Virginica" style="max-height: 200px;">
+                            <h5>🌹 Iris Virginica</h5>
+                            <small class="text-muted">Petal Length > 2.45 cm et Petal Width > 1.65 cm</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="alert alert-info" role="alert">
+        <h4>🚀 Prêt à tester ?</h4>
+        <p><strong>Le modèle Decision Tree entraîné est sauvegardé et prêt à être utilisé !</strong></p>
+        <p>Testez les règles de décision avec vos propres valeurs de caractéristiques.</p>
+        <a href="{% url 'algosAi:dt_iris_exemple_tester' %}" class="btn btn-success btn-lg">🧪 Tester le Modèle Decision Tree</a>
+    </div>
 </div>
+
 {% include "includes/footer.html" %}

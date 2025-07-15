@@ -1,0 +1,327 @@
+{% include "includes/heade                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:xgb_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:xgb_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">XGBoost</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">⚡ XGBoost - Extreme Gradient Boosting</h1>
+        </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:xgb_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:xgb_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description principale -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4>🚀 Qu'est-ce que XGBoost ?</h4>
+                <p><strong>XGBoost (Extreme Gradient Boosting)</strong> est une implémentation optimisée 
+                du gradient boosting conçue pour la vitesse et les performances. Il est devenu l'un des 
+                algorithmes les plus populaires en machine learning, notamment dans les compétitions de data science.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Principe de fonctionnement -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>🎯 Principe de fonctionnement</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Gradient Boosting :</strong> Combine séquentiellement des modèles faibles (arbres de décision)</li>
+                        <li><strong>Optimisation :</strong> Chaque nouveau modèle corrige les erreurs des précédents</li>
+                        <li><strong>Régularisation :</strong> Prévient le surapprentissage avec des termes de pénalité</li>
+                        <li><strong>Parallélisation :</strong> Calculs parallèles pour une vitesse optimale</li>
+                        <li><strong>Approximation :</strong> Utilise des histogrammes pour des calculs plus rapides</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hyperparamètres -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>⚙️ Hyperparamètres clés</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>n_estimators :</strong> Nombre d'arbres à construire (100 dans nos modèles)</li>
+                        <li><strong>max_depth :</strong> Profondeur maximale des arbres (6)</li>
+                        <li><strong>learning_rate :</strong> Taux d'apprentissage (0.1)</li>
+                        <li><strong>subsample :</strong> Fraction d'échantillons utilisés (0.8)</li>
+                        <li><strong>colsample_bytree :</strong> Fraction de features utilisées (0.8)</li>
+                        <li><strong>reg_alpha :</strong> Régularisation L1</li>
+                        <li><strong>reg_lambda :</strong> Régularisation L2</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avantages et Inconvénients -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Performances exceptionnelles :</strong> État de l'art sur de nombreux datasets</li>
+                        <li><strong>Gestion automatique :</strong> Valeurs manquantes traitées automatiquement</li>
+                        <li><strong>Régularisation intégrée :</strong> Prévention du surapprentissage</li>
+                        <li><strong>Parallélisation :</strong> Optimisation et calculs parallèles avancés</li>
+                        <li><strong>Flexibilité :</strong> Classification et régression</li>
+                        <li><strong>Feature importance :</strong> Calcul de l'importance des variables</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5>⚠️ Inconvénients</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Complexité :</strong> Nombreux hyperparamètres à tuner</li>
+                        <li><strong>Surapprentissage :</strong> Peut surapprendre avec de petits datasets</li>
+                        <li><strong>Consommation mémoire :</strong> Plus gourmand en ressources</li>
+                        <li><strong>Sensibilité :</strong> Sensible aux outliers</li>
+                        <li><strong>Interprétabilité :</strong> Modèle complexe difficile à interpréter</li>
+                        <li><strong>Installation :</strong> Dépendances externes parfois complexes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>💼 Applications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Classification</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Régression</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Ranking</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Compétitions ML</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Finance quantitative</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Publicité en ligne</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Analyse de risque</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Recommandation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance comparative -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>📊 Performance comparative dans notre plateforme</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>🌸 Classification Iris</h5>
+                            <ul>
+                                <li><strong>Précision :</strong> 100% (Perfect score)</li>
+                                <li><strong>Temps d'entraînement :</strong> Très rapide</li>
+                                <li><strong>Stabilité :</strong> Excellente</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>🏠 Régression California Housing</h5>
+                            <ul>
+                                <li><strong>R² Score :</strong> ~0.83 (Très bon)</li>
+                                <li><strong>Gestion des non-linéarités :</strong> Excellente</li>
+                                <li><strong>Robustesse :</strong> Très bonne</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+
+                        <h4>❌ Inconvénients :</h4>
+                        <ul>
+                            <li>Temps d'entraînement plus long que les modèles simples</li>
+                            <li>Nombreux hyperparamètres à optimiser</li>
+                            <li>Peut être sensible au surapprentissage sans bonne régularisation</li>
+                            <li>Modèle "boîte noire" difficile à interpréter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h4>🌸 Classification - Dataset Iris</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Performance :</strong> 90% de précision</p>
+                                <p><strong>Features importantes :</strong></p>
+                                <ul>
+                                    <li>Petal Length (48.6%)</li>
+                                    <li>Petal Width (43.9%)</li>
+                                    <li>Sepal Width (4.8%)</li>
+                                    <li>Sepal Length (2.7%)</li>
+                                </ul>
+                                <div class="d-grid gap-2">
+                                    <a href="{% url 'algosAi:xgb_iris' %}" class="btn btn-success">Voir la Classification</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h4>🏠 Régression - California Housing</h4>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Performance :</strong> R² = 0.831 (Meilleur score!)</p>
+                                <p><strong>Features importantes :</strong></p>
+                                <ul>
+                                    <li>MedInc (42.8%)</li>
+                                    <li>AveOccup (13.4%)</li>
+                                    <li>Longitude (11.1%)</li>
+                                    <li>AveRooms (10.2%)</li>
+                                </ul>
+                                <div class="d-grid gap-2">
+                                    <a href="{% url 'algosAi:xgb_regression' %}" class="btn btn-primary">Voir la Régression</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4>📊 Comparaison des performances :</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Algorithme</th>
+                                    <th>Iris (Accuracy)</th>
+                                    <th>California Housing (R²)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning">
+                                    <td><strong>XGBoost</strong></td>
+                                    <td><strong>90.0%</strong></td>
+                                    <td><strong>83.1%</strong> 🏆</td>
+                                </tr>
+                                <tr>
+                                    <td>Random Forest</td>
+                                    <td>90.0%</td>
+                                    <td>77.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>SVM</td>
+                                    <td>96.7%</td>
+                                    <td>72.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>AdaBoost</td>
+                                    <td>96.7%</td>
+                                    <td>51.3%</td>
+                                </tr>
+                                <tr>
+                                    <td>Decision Tree</td>
+                                    <td>100%</td>
+                                    <td>68.9%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-muted">
+                            <small>🏆 XGBoost obtient le meilleur score pour la régression grâce à son gradient boosting optimisé.</small>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'algosAi:index' %}" class="btn btn-secondary btn-lg">← Retour à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

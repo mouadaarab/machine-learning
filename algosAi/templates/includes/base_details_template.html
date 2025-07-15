@@ -1,0 +1,172 @@
+{% comment %}
+Template de base uniforme pour les pages de détails des algorithmes
+Variables requises:
+- algo_name: Nom de l'algorithme (ex: "Random Forest")
+- algo_icon: Icône de l'algorithme (ex: "🌲")
+- algo_description: Description courte de l'algorithme
+- algo_principle: Principe de fonctionnement
+- algo_hyperparams: Liste des hyperparamètres
+- algo_advantages: Liste des avantages
+- algo_disadvantages: Liste des inconvénients
+- algo_applications: Liste des applications
+- pdf_file: Nom du fichier PDF (optionnel)
+- navigation_links: Liens de navigation spécifiques
+{% endcomment %}
+
+{% include "includes/header.html" %}
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ algo_name }}</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">{{ algo_icon }} {{ algo_name }}</h1>
+        </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for link in navigation_links %}
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ link.url }}" class="btn btn-outline-primary btn-block w-100">{{ link.icon }} {{ link.title }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description principale -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4>🚀 Qu'est-ce que {{ algo_name }} ?</h4>
+                <p>{{ algo_description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Principe de fonctionnement -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>🎯 Principe de fonctionnement</h4>
+                </div>
+                <div class="card-body">
+                    {{ algo_principle|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hyperparamètres -->
+    {% if algo_hyperparams %}
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>⚙️ Hyperparamètres clés</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for param in algo_hyperparams %}
+                        <li><strong>{{ param.name }}:</strong> {{ param.description }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Avantages et Inconvénients -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for advantage in algo_advantages %}
+                        <li>{{ advantage|safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5>⚠️ Inconvénients</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for disadvantage in algo_disadvantages %}
+                        <li>{{ disadvantage|safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>💼 Applications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for application in algo_applications %}
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">{{ application }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation PDF -->
+    {% if pdf_file %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>📚 Documentation</h4>
+                </div>
+                <div class="card-body">
+                    {% load static %}
+                    <iframe src="{% static 'pdfs/'|add:pdf_file %}" width="100%" height="600px" style="border:1px solid #ccc;">
+                        Ce navigateur ne supporte pas les PDFs. Veuillez le télécharger:
+                        <a href="{% static 'pdfs/'|add:pdf_file %}">Télécharger PDF</a>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% include "includes/footer.html" %}

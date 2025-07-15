@@ -1,29 +1,192 @@
 {% include "includes/header.html" %}
-<div class="container">
-    <h2 class="mb-4">Random Forest Algorithm</h2>
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Random Forest</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
     <div class="row">
-        <div class="col-md-6">
-            <h3>Details</h3>
-            <p>L'algorithme Random Forest est un algorithme d'apprentissage ensembliste qui construit une multitude d'arbres 
-            de décision au moment de l'apprentissage et produit le mode des classes (classification) ou la prédiction moyenne 
-            (régression) des arbres individuels.</p>
-        </div>
-        <div class="col-md-6">
-            <h3>Applications</h3>
-            <ul>
-                <li>Tâches de Classification</li>
-                <li>Tâches de Regression</li>
-                <li>Feature selection</li>
-                <li>Anomaly detection</li>
-            </ul>
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">🌲 Random Forest Algorithm</h1>
         </div>
     </div>
-    <div>
-        {% load static %}
-        <iframe src="{% static 'pdfs/random_forest_course.pdf' %}" width="100%" height="600px" style="border:1px solid #ccc;">
-            Ce navigateur ne supporte pas PDFs. Veuillez le télécharger:
-            <a href="{% static 'pdfs/random_forest_course.pdf' %}">Download PDF</a>
-        </iframe>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:rf_iris' %}" class="btn btn-outline-primary btn-block w-100">🌸 Classification Iris</a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:rf_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description principale -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4>🚀 Qu'est-ce que Random Forest ?</h4>
+                <p><strong>Random Forest</strong> est un algorithme d'apprentissage ensembliste qui construit une multitude d'arbres 
+                de décision au moment de l'apprentissage et produit le mode des classes (classification) ou la prédiction moyenne 
+                (régression) des arbres individuels. Il améliore la précision et contrôle le surapprentissage.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Principe de fonctionnement -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>🎯 Principe de fonctionnement</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Bootstrap Aggregating :</strong> Création de multiples échantillons bootstrap</li>
+                        <li><strong>Arbres de décision :</strong> Construction d'arbres sur chaque échantillon</li>
+                        <li><strong>Feature randomness :</strong> Sélection aléatoire de caractéristiques à chaque nœud</li>
+                        <li><strong>Agrégation :</strong> Vote majoritaire (classification) ou moyenne (régression)</li>
+                        <li><strong>Out-of-bag :</strong> Validation sur les échantillons non utilisés</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hyperparamètres -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>⚙️ Hyperparamètres clés</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>n_estimators :</strong> Nombre d'arbres dans la forêt (100 dans nos modèles)</li>
+                        <li><strong>max_depth :</strong> Profondeur maximale des arbres</li>
+                        <li><strong>min_samples_split :</strong> Nombre minimum d'échantillons pour diviser un nœud</li>
+                        <li><strong>min_samples_leaf :</strong> Nombre minimum d'échantillons dans une feuille</li>
+                        <li><strong>max_features :</strong> Nombre de caractéristiques à considérer pour la meilleure division</li>
+                        <li><strong>random_state :</strong> Graine pour la reproductibilité</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avantages et Inconvénients -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Robustesse :</strong> Résistant au surapprentissage</li>
+                        <li><strong>Précision élevée :</strong> Généralement très performant</li>
+                        <li><strong>Gestion des données :</strong> Fonctionne avec des valeurs manquantes</li>
+                        <li><strong>Importance des variables :</strong> Fournit une estimation de l'importance des caractéristiques</li>
+                        <li><strong>Polyvalence :</strong> Classification et régression</li>
+                        <li><strong>Parallélisation :</strong> Entraînement parallèle possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5>⚠️ Inconvénients</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Complexité :</strong> Modèle moins interprétable qu'un arbre unique</li>
+                        <li><strong>Mémoire :</strong> Consomme plus de mémoire que les modèles simples</li>
+                        <li><strong>Biais :</strong> Peut être biaisé vers les variables catégorielles avec plus de niveaux</li>
+                        <li><strong>Temps d'inférence :</strong> Plus lent pour la prédiction</li>
+                        <li><strong>Hyperparamètres :</strong> Nécessite un tuning pour optimiser les performances</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>💼 Applications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Classification</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Régression</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Feature Selection</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-primary">Détection d'anomalies</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Bioinformatique</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Finance</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">E-commerce</span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <span class="badge bg-success">Vision par ordinateur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation PDF -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>📚 Documentation</h4>
+                </div>
+                <div class="card-body">
+                    {% load static %}
+                    <iframe src="{% static 'pdfs/random_forest_course.pdf' %}" width="100%" height="600px" style="border:1px solid #ccc;">
+                        Ce navigateur ne supporte pas les PDFs. Veuillez le télécharger:
+                        <a href="{% static 'pdfs/random_forest_course.pdf' %}">Télécharger PDF</a>
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 {% include "includes/footer.html" %}

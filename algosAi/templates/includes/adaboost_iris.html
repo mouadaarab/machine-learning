@@ -1,21 +1,94 @@
 {% include "includes/header.html" %}
-<div class="container">
-    <h2 class="mb-4">AdaBoost pour la prédiction de type des fleurs - IRIS</h2>
+
+<div class="container mt-4">
+    <!-- Navigation Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'algosAi:adaboost_details' %}">AdaBoost</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Classification Iris</li>
+        </ol>
+    </nav>
+
+    <!-- Titre principal -->
     <div class="row">
-        <div class="col-md-6">
-            <h3>Détails</h3>
-            <p>IRIS est un jeu de données bien connu en ML, qui contient des mesures de différentes caractéristiques de fleurs d'iris.</p>
-            <p>Le modèle AdaBoost atteint une <strong>précision de 96.7%</strong> sur ce dataset, en utilisant 200 arbres de décision comme weak learners.</p>
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">🚀 AdaBoost pour la Classification Iris</h1>
         </div>
+    </div>
+
+    <!-- Navigation interne -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧭 Navigation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:adaboost_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:adaboost_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:adaboost_iris_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- À propos du dataset Iris -->
+    <div class="row mb-4">
         <div class="col-md-6">
-            <h3>Les étapes d'implémentation:</h3>
-            <ul>
-                <li>Chargement du jeu de données IRIS</li>
-                <li>Prétraitement des données</li>
-                <li>Entraînement du modèle AdaBoost avec 200 estimateurs</li>
-                <li>Évaluation du modèle</li>
-                <li>Enregistrement du modèle entraîné</li>
-            </ul>
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h4>🌸 Dataset Iris</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>IRIS</strong> est un jeu de données classique en machine learning, introduit par Ronald Fisher en 1936. 
+                    Il contient des mesures de différentes caractéristiques de fleurs d'iris de trois espèces différentes.</p>
+                    
+                    <h5>Caractéristiques :</h5>
+                    <ul>
+                        <li><strong>Sepal Length :</strong> Longueur du sépale</li>
+                        <li><strong>Sepal Width :</strong> Largeur du sépale</li>
+                        <li><strong>Petal Length :</strong> Longueur du pétale</li>
+                        <li><strong>Petal Width :</strong> Largeur du pétale</li>
+                    </ul>
+
+                    <h5>Classes :</h5>
+                    <ul>
+                        <li>🌸 <strong>Setosa</strong></li>
+                        <li>🌺 <strong>Versicolor</strong></li>
+                        <li>🌹 <strong>Virginica</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h4>🔄 Étapes d'implémentation</h4>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li><strong>Chargement :</strong> Import du dataset Iris depuis sklearn</li>
+                        <li><strong>Préparation :</strong> Division train/test (80%/20%)</li>
+                        <li><strong>Entraînement :</strong> AdaBoostClassifier avec 200 estimateurs</li>
+                        <li><strong>Évaluation :</strong> Calcul des métriques de performance</li>
+                        <li><strong>Sauvegarde :</strong> Sérialisation du modèle entraîné avec Joblib</li>
+                        <li><strong>Validation :</strong> Tests de prédiction et vérification</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 
