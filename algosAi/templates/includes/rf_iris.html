@@ -1,7 +1,6 @@
 {% include "includes/header.html" %}
-
-<div class="container mt-4">
-    <!-- Navigation Breadcrumb -->
+<div class="container">
+    <!-- Navigation de retour -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'algosAi:index' %}">Accueil</a></li>
@@ -10,10 +9,17 @@
         </ol>
     </nav>
 
-    <!-- Titre principal -->
-    <div class="row">
+    <!-- Titre -->
+    <div class="row mb-4">
         <div class="col-md-12">
-            <h1 class="text-center mb-4">🌲 Random Forest pour la Classification Iris</h1>
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1 class="h3 mb-0">🌲 Random Forest - Classification des Espèces d'Iris</h1>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Classification des espèces de fleurs d'iris avec l'algorithme Random Forest et 100 arbres de décision</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -21,22 +27,30 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-dark text-white">
                     <h4>🧭 Navigation</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:rf_details' %}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                                📖 Théorie Random Forest
+                            </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        <div class="col-md-3">
+                            <span class="btn btn-success btn-sm w-100 mb-2">
+                                🌸 Classification Iris (Actuel)
+                            </span>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:rf_regression' %}" class="btn btn-outline-info btn-sm w-100 mb-2">
+                                🏠 Régression Housing
+                            </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-outline-warning btn-sm w-100 mb-2">
+                                🧪 Tester le Modèle
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -44,122 +58,38 @@
         </div>
     </div>
 
-    <!-- À propos du dataset Iris -->
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <div class="card h-100">
-                <div class="card-header bg-info text-white">
-                    <h4>🌸 Dataset Iris</h4>
-                </div>
-                <div class="card-body">
-                    <p><strong>IRIS</strong> est un jeu de données classique en machine learning, introduit par Ronald Fisher en 1936. 
-                    Il contient des mesures de différentes caractéristiques de fleurs d'iris de trois espèces différentes.</p>
-                    
-                    <h5>Caractéristiques :</h5>
-                    <ul>
-                        <li><strong>Sepal Length :</strong> Longueur du sépale</li>
-                        <li><strong>Sepal Width :</strong> Largeur du sépale</li>
-                        <li><strong>Petal Length :</strong> Longueur du pétale</li>
-                        <li><strong>Petal Width :</strong> Largeur du pétale</li>
-                    </ul>
-
-                    <h5>Classes :</h5>
-                    <ul>
-                        <li>🌸 <strong>Setosa</strong></li>
-                        <li>🌺 <strong>Versicolor</strong></li>
-                        <li>🌹 <strong>Virginica</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card h-100">
-                <div class="card-header bg-secondary text-white">
-                    <h4>🔄 Étapes d'implémentation</h4>
-                </div>
-                <div class="card-body">
-                    <ol>
-                        <li><strong>Chargement :</strong> Import du dataset Iris depuis sklearn</li>
-                        <li><strong>Préparation :</strong> Division train/test (80%/20%)</li>
-                        <li><strong>Entraînement :</strong> RandomForestClassifier avec 100 arbres</li>
-                        <li><strong>Évaluation :</strong> Calcul des métriques de performance</li>
-                        <li><strong>Sauvegarde :</strong> Sérialisation du modèle entraîné avec Joblib</li>
-                        <li><strong>Validation :</strong> Tests de prédiction et vérification</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+    <!-- Description -->
+    <div class="alert alert-info" role="alert">
+        <h5>🎯 Objectif</h5>
+        <p>Utiliser <strong>Random Forest</strong> pour classifier les espèces de fleurs d'iris. Ce modèle combine 100 arbres de décision pour atteindre une <strong>précision de 100%</strong> grâce à la diversité des arbres et au vote majoritaire.</p>
     </div>
 
-    <!-- Performance du modèle -->
+    <!-- Dataset Iris -->
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-success text-white">
-                    <h4>📊 Performance du Modèle Random Forest</h4>
+                <div class="card-header bg-primary text-white">
+                    <h4>🌸 Dataset Iris</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="text-center">
-                                <h5>Précision Globale</h5>
-                                <h2 class="text-success">100%</h2>
-                                <p class="text-muted">Sur le jeu de test</p>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h5>Importance des Caractéristiques</h5>
-                            <div class="progress-group">
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Petal Width:</strong> Impact très élevé</span>
-                                        <span>~45%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Petal Length:</strong> Impact élevé</span>
-                                        <span>~42%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 42%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Sepal Length:</strong> Impact modéré</span>
-                                        <span>~8%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 8%"></div>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="d-flex justify-content-between">
-                                        <span><strong>Sepal Width:</strong> Impact faible</span>
-                                        <span>~5%</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 5%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h5>Détails de performance</h5>
+                        <div class="col-md-6">
+                            <h5>📊 Informations générales</h5>
                             <ul>
-                                <li><strong>Modèle :</strong> RandomForestClassifier avec 100 arbres</li>
-                                <li><strong>Précision par classe :</strong> 100% pour chaque espèce d'iris</li>
-                                <li><strong>Stabilité :</strong> Très haute grâce à l'ensemble d'arbres</li>
-                                <li><strong>Robustesse :</strong> Résistant au surapprentissage</li>
+                                <li><strong>Échantillons :</strong> 150 fleurs</li>
+                                <li><strong>Caractéristiques :</strong> 4 variables (longueur/largeur)</li>
+                                <li><strong>Classes :</strong> 3 espèces d'iris</li>
+                                <li><strong>Source :</strong> Ronald Fisher (1936)</li>
+                                <li><strong>Répartition :</strong> 50 échantillons par classe</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>🔧 Caractéristiques mesurées</h5>
+                            <ul>
+                                <li><strong>Sepal Length :</strong> Longueur du sépale (cm)</li>
+                                <li><strong>Sepal Width :</strong> Largeur du sépale (cm)</li>
+                                <li><strong>Petal Length :</strong> Longueur du pétale (cm)</li>
+                                <li><strong>Petal Width :</strong> Largeur du pétale (cm)</li>
                             </ul>
                         </div>
                     </div>
@@ -168,27 +98,130 @@
         </div>
     </div>
 
-    <!-- Images des espèces d'iris -->
+    <!-- Les 3 espèces d'Iris -->
     <div class="row mb-4">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-dark text-white">
-                    <h4>🖼️ Les trois espèces d'Iris</h4>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>🌸 Iris Setosa</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            {% load static %}
-                            <img src="{% static 'images/setosa.jpeg' %}" class="img-fluid rounded mb-2" alt="Iris Setosa" style="max-height: 200px;">
-                            <h5>🌸 Iris Setosa</h5>
+                    <div class="text-center mb-3">
+                        {% load static %}
+                        <img src="{% static 'images/setosa.jpeg' %}" class="img-fluid rounded" alt="Iris Setosa" style="max-height: 150px;">
+                    </div>
+                    <h6>Caractéristiques typiques :</h6>
+                    <ul>
+                        <li><strong>Pétales :</strong> Courts et larges</li>
+                        <li><strong>Sépales :</strong> Moyens</li>
+                        <li><strong>Classification :</strong> 100% réussie</li>
+                        <li><strong>Particularité :</strong> Facilement séparable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5>🌺 Iris Versicolor</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="{% static 'images/versicolor.JPG' %}" class="img-fluid rounded" alt="Iris Versicolor" style="max-height: 150px;">
+                    </div>
+                    <h6>Caractéristiques typiques :</h6>
+                    <ul>
+                        <li><strong>Pétales :</strong> Moyens</li>
+                        <li><strong>Sépales :</strong> Intermédiaires</li>
+                        <li><strong>Classification :</strong> 100% réussie</li>
+                        <li><strong>Particularité :</strong> Classe intermédiaire</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5>🌹 Iris Virginica</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="{% static 'images/virginica.jpg' %}" class="img-fluid rounded" alt="Iris Virginica" style="max-height: 150px;">
+                    </div>
+                    <h6>Caractéristiques typiques :</h6>
+                    <ul>
+                        <li><strong>Pétales :</strong> Longs et étroits</li>
+                        <li><strong>Sépales :</strong> Grands</li>
+                        <li><strong>Classification :</strong> 100% réussie</li>
+                        <li><strong>Particularité :</strong> Plus grandes dimensions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance du modèle -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5>📊 Performance du Modèle</h5>
+                </div>
+                <div class="card-body text-center">
+                    <h2 class="text-success">100%</h2>
+                    <p>Précision globale sur le jeu de test</p>
+                    <ul class="text-start">
+                        <li><strong>Modèle :</strong> RandomForestClassifier</li>
+                        <li><strong>Arbres :</strong> 100</li>
+                        <li><strong>Échantillons test :</strong> 30</li>
+                        <li><strong>Erreurs :</strong> 0</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>🔍 Importance des Caractéristiques</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Petal Width:</strong></span>
+                            <span>45%</span>
                         </div>
-                        <div class="col-md-4 text-center">
-                            <img src="{% static 'images/versicolor.JPG' %}" class="img-fluid rounded mb-2" alt="Iris Versicolor" style="max-height: 200px;">
-                            <h5>🌺 Iris Versicolor</h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 45%"></div>
                         </div>
-                        <div class="col-md-4 text-center">
-                            <img src="{% static 'images/virginica.jpg' %}" class="img-fluid rounded mb-2" alt="Iris Virginica" style="max-height: 200px;">
-                            <h5>🌹 Iris Virginica</h5>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Petal Length:</strong></span>
+                            <span>42%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Sepal Length:</strong></span>
+                            <span>8%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 8%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span><strong>Sepal Width:</strong></span>
+                            <span>5%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-secondary" style="width: 5%"></div>
                         </div>
                     </div>
                 </div>
@@ -196,12 +229,102 @@
         </div>
     </div>
 
+    <!-- Configuration Random Forest -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4>⚙️ Configuration Random Forest</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>🌳 Paramètres des arbres</h5>
+                            <ul>
+                                <li><strong>n_estimators :</strong> 100 arbres</li>
+                                <li><strong>max_depth :</strong> Aucune limite</li>
+                                <li><strong>min_samples_split :</strong> 2</li>
+                                <li><strong>min_samples_leaf :</strong> 1</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>🎲 Randomisation</h5>
+                            <ul>
+                                <li><strong>Bootstrap :</strong> Activé</li>
+                                <li><strong>max_features :</strong> √(nombre_features)</li>
+                                <li><strong>random_state :</strong> 42 (reproductibilité)</li>
+                                <li><strong>Bagging :</strong> Avec remise</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>📈 Métriques</h5>
+                            <ul>
+                                <li><strong>Accuracy :</strong> 100%</li>
+                                <li><strong>Precision :</strong> 100%</li>
+                                <li><strong>Recall :</strong> 100%</li>
+                                <li><strong>F1-Score :</strong> 100%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avantages Random Forest -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5>✅ Avantages Random Forest</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Robustesse :</strong> Résistant au surapprentissage</li>
+                        <li><strong>Précision :</strong> Excellent sur Iris (100%)</li>
+                        <li><strong>Feature importance :</strong> Identifie variables clés</li>
+                        <li><strong>Parallélisation :</strong> Arbres indépendants</li>
+                        <li><strong>Pas de normalisation :</strong> Résistant aux outliers</li>
+                        <li><strong>Interprétabilité :</strong> Importance des features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5>🔧 Pourquoi Random Forest excelle sur Iris</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Dataset petit :</strong> 150 échantillons, RF gère bien</li>
+                        <li><strong>Classes séparables :</strong> Pétales discriminants</li>
+                        <li><strong>Pas de bruit :</strong> Dataset propre et équilibré</li>
+                        <li><strong>Features pertinentes :</strong> 4 variables toutes utiles</li>
+                        <li><strong>Voting :</strong> Consensus de 100 arbres</li>
+                        <li><strong>Diversité :</strong> Bootstrap + random features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Call to action -->
-    <div class="alert alert-info" role="alert">
-        <h4>🚀 Prêt à tester ?</h4>
-        <p><strong>Le modèle Random Forest entraîné est sauvegardé et prêt à être utilisé !</strong></p>
-        <p>Cliquez sur le bouton ci-dessous pour tester le modèle avec vos propres valeurs de caractéristiques.</p>
-        <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-success btn-lg">🧪 Tester le Modèle Random Forest</a>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>🧪 Tester le modèle</h4>
+                </div>
+                <div class="card-body text-center">
+                    <p>Prêt à voir Random Forest en action ? Testez le modèle avec vos propres mesures d'iris !</p>
+                    <a href="{% url 'algosAi:rf_iris_exemple_tester' %}" class="btn btn-primary btn-lg">
+                        🌸 Tester le Modèle Random Forest
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

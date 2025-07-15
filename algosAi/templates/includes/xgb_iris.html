@@ -1,6 +1,13 @@
-{% include "includes/header.html" %}
-
-<div class="container mt-4">
+{% include "includes/header.                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:xgb_details' %}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                                📖 Théorie XGBoost
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="btn btn-success btn-sm w-100 mb-2">
+                                🌸 Classification Iris (Actuel)
+                            </span>
+                        </div><div class="container mt-4">
     <!-- Navigation Breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -26,17 +33,25 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:xgb_details' %}" class="btn btn-outline-info btn-block w-100">📚 Détails Algorithme</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:xgb_details' %}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                                � Théorie XGBoost
+                            </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:xgb_regression' %}" class="btn btn-outline-primary btn-block w-100">🏠 Régression Housing</a>
+                        <div class="col-md-3">
+                            <span class="btn btn-success btn-sm w-100 mb-2">
+                                � Classification Iris (Actuel)
+                            </span>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:xgb_iris_exemple_tester' %}" class="btn btn-success btn-block w-100">🧪 Tester le Modèle</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:xgb_regression' %}" class="btn btn-outline-info btn-sm w-100 mb-2">
+                                🏠 Régression Housing
+                            </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{% url 'algosAi:index' %}" class="btn btn-outline-secondary btn-block w-100">↩️ Retour Accueil</a>
+                        <div class="col-md-3">
+                            <a href="{% url 'algosAi:xgb_iris_exemple_tester' %}" class="btn btn-outline-warning btn-sm w-100 mb-2">
+                                🧪 Tester le Modèle
+                            </a>
                         </div>
                     </div>
                 </div>
